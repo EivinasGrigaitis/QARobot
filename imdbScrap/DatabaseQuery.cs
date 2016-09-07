@@ -7,7 +7,7 @@ namespace QARobot
 {
     class DatabaseQuery
     {
-        private static readonly SqlCeConnection Connection = new SqlCeConnection("Data Source = database.sdf");
+        private static readonly SqlCeConnection Connection = new SqlCeConnection(@"Data Source = database.sdf");
         public static SqlCeConnection Connect
         {
             get
@@ -25,8 +25,7 @@ namespace QARobot
             if (Connect.State == ConnectionState.Open)
                 Connect.Close();
         }
-
-        public static void AddActorToDb(string name, string surname, string born)
+        public static void AddActorToDb(String name, String surname, String born)
         {
             try
             {
@@ -44,11 +43,11 @@ namespace QARobot
             }
         }
 
-        public static void AddMovieToDb(string name, Decimal rating, string genre, string year)
+        public static void AddMovieToDb(String name, Decimal rating, String genre, String year)
         {
             try
             {
-                var sql = "INESRT INTO Film(Name, Rating, Genre, Year) VALUES(@name, @rating, @genre, @year)";
+                var sql = "INSERT INTO Film(Name, Rating, Genre, Year) VALUES(@name, @rating, @genre, @year)";
                 var cmd = new SqlCeCommand(sql, Connect);
                 cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = name;
                 cmd.Parameters.Add("@rating", SqlDbType.Decimal, 2).Value = rating;
@@ -61,10 +60,10 @@ namespace QARobot
                 CloseConnections();
                 Console.WriteLine("Count not insert." + name + ", " + rating + "," + genre + "," + year);
             }
-
         }
 
-        public static int SelectActorId(string name, string surname)
+
+        public static int SelectActorId(String name, String surname)
         {
             var value = 0;
             try
@@ -148,7 +147,7 @@ namespace QARobot
                     INNER JOIN Film AS f ON fa.filmId = f.filmId
                     INNER JOIN actor AS a ON fa.ActorId = a.actorId 
                     GROUP BY a.Name, a.surname
-                    ORDER BY filmusk DESC ", Connect))
+                    ORDER BY filmuSk DESC ", Connect))
                 {
                     using (var reader = command.ExecuteReader())
                     {
