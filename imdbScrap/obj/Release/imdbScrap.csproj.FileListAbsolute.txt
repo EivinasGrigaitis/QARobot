@@ -1,0 +1,27 @@
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Release\imdbScrap.exe.config
+C:\Users\WIN8\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\imdbScrap.exe.config
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\imdbScrap.exe.config
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\database.sdf
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\imdbScrap.exe
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\imdbScrap.pdb
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\EntityFramework.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\EntityFramework.SqlServerCompact.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\HtmlAgilityPack.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\Newtonsoft.Json.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\nunit.framework.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\System.Data.SqlServerCe.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\WebDriver.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\WebDriver.Support.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\EntityFramework.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\EntityFramework.SqlServerCompact.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\HtmlAgilityPack.pdb
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\HtmlAgilityPack.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\Newtonsoft.Json.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\nunit.framework.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\WebDriver.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Release\WebDriver.Support.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\obj\Release\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\obj\Release\imdbScrap.exe
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\obj\Release\imdbScrap.pdb

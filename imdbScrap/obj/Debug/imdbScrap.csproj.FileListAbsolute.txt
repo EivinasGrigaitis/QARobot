@@ -1,0 +1,199 @@
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\imdbScrap.exe
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\imdbScrap.pdb
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\obj\Debug\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\EDG\Desktop\imdbScrap\imdbScrap\bin\Debug\database.sdf
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\database.sdf
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\imdbScrap.exe
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\imdbScrap.pdb
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\WIN8\OneDrive\imdbScrap\imdbScrap\obj\Debug\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\database.sdf
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\imdbScrap.exe
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\imdbScrap.pdb
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\EDG\OneDrive\imdbScrap\imdbScrap\obj\Debug\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\database.sdf
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.pdb
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\Vykis\Desktop\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\database.sdf
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.pdb
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\EDG\Desktop\08082016\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\database.sdf
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.pdb
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\database.sdf
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.pdb
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\EDG\Desktop\ViskasOk\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\database.sdf
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.exe
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\imdbScrap.pdb
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\EDG\Desktop\Testui\IMDBWIthDB\imdbScrap\obj\Debug\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\database.sdf
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\imdbScrap.exe
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\imdbScrap.pdb
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\obj\Debug\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\WIN8\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\WIN8\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\WIN8\OneDrive\imdbScrap\IMDBWIthDB[TURI VEIKTI]\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\database.sdf
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\imdbScrap.exe
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\imdbScrap.pdb
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\WebDriver.Support.dll
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\WebDriver.Support.xml
+C:\Users\Edvard\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\obj\Debug\imdbScrap.csprojResolveAssemblyReference.cache
+C:\Users\WIN8\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\WIN8\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\WIN8\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\obj\Debug\imdbScrap.pdb
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\bin\Debug\imdbScrap.exe.config
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\obj\Debug\imdbScrap.exe
+C:\Users\EDG\OneDrive\imdbScrap\IMDBWIthDB[Naujas]\imdbScrap\obj\Debug\imdbScrap.pdb
