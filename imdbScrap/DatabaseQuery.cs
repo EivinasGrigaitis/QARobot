@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlServerCe;
 
-namespace imdbScrap
+namespace QARobot
 {
     class DatabaseQuery
     {

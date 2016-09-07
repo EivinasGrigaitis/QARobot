@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlServerCe;
 using System.Diagnostics;
 
-namespace imdbScrap
+namespace QARobot
 {
     class Program
     {

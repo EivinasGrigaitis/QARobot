@@ -1,17 +1,17 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using Newtonsoft.Json.Linq;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using HtmlAgilityPack;
-using Newtonsoft.Json.Linq;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
 
-namespace imdbScrap
+namespace QARobot
 {
     public class Scraper
     {
