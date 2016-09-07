@@ -33,16 +33,26 @@ namespace QARobot
 
             swatch.Start();
 
-            var scraper = new Scraper(aktoriai); // Constructor accepts List<string> with actor names for scraping
+
+            var scraper = new ActorScraper();
+            scraper.ScrapeActors(new List<string> { "Brad Pitt", "Angelina Jolie" });
 
 
-            foreach (var elem in scraper.GetActors())
-            {
-                Console.WriteLine(elem);
-            }
 
 
-            Console.WriteLine($"-- Unique films for all actors - {scraper.GetUniqueFilms().Count} --");
+
+            //var scraper = new Scraper(aktoriai); // Constructor accepts List<string> with actor names for scraping
+
+
+            //foreach (var elem in scraper.GetActors())
+            //{
+            //    Console.WriteLine(elem);
+            //}
+            //Console.WriteLine($"-- Unique films for all actors - {scraper.GetUniqueFilms().Count} --");
+            /*
+            var uniqueFilms = new List<Film>();//scraper.GetUniqueFilms();
+            var UniqueActors = new List<Actor>();// scraper.GetActors();
+
             Console.WriteLine("Data transfer to database");
 
             using (SqlCeConnection connection = new SqlCeConnection(@"Data Source = database.sdf"))
@@ -50,11 +60,11 @@ namespace QARobot
                 try
                 {
                     connection.Open();
-                    foreach (var actor in scraper.GetActors())
+                    foreach (var actor in UniqueActors)
                     {
-                        DatabaseQuery.AddActorToDb(actor._name, actor._surname, actor.Born, connection);
+                        DatabaseQuery.AddActorToDb(actor.Name, actor.Surname, actor.Born, connection);
                     }
-                    foreach (var movie in scraper.GetUniqueFilms())
+                    foreach (var movie in uniqueFilms)
                     {
                         DatabaseQuery.AddMovieToDb(movie.Name, movie.Rating, movie.Genre, movie.Year,
                             connection);
@@ -63,9 +73,9 @@ namespace QARobot
                     Console.WriteLine("Actors and films query");
 
 
-                    foreach (var actor in scraper.GetActors())
+                    foreach (var actor in UniqueActors)
                     {
-                        int actorId = DatabaseQuery.SelectActorId(actor._name, actor._surname, connection);
+                        int actorId = DatabaseQuery.SelectActorId(actor.Name, actor.Surname, connection);
                         foreach (var film in actor.Films)
                         {
                             int movieId = DatabaseQuery.SelectFilmId(film.Name, connection);
@@ -104,7 +114,9 @@ namespace QARobot
                     Console.WriteLine("Error executing SQL query. " + ex.Message);
                 }
             }
+            */
         }
+        
     }
 }
 
