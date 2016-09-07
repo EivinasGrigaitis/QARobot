@@ -23,3 +23,6 @@ C:\Users\EDG\Desktop\QARobot\imdbScrap\bin\Debug\WebDriver.Support.xml
 C:\Users\EDG\Desktop\QARobot\imdbScrap\obj\Debug\QARobot.csprojResolveAssemblyReference.cache
 C:\Users\EDG\Desktop\QARobot\imdbScrap\obj\Debug\QARobot.exe
 C:\Users\EDG\Desktop\QARobot\imdbScrap\obj\Debug\QARobot.pdb
+C:\Users\Vykis\Desktop\QARobot\imdbScrap\bin\Debug\QARobot.exe.config
+C:\Users\Vykis\Desktop\QARobot\imdbScrap\obj\Debug\QARobot.exe
+C:\Users\Vykis\Desktop\QARobot\imdbScrap\obj\Debug\QARobot.pdb

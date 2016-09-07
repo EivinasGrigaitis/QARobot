@@ -1,18 +1,37 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Data.SqlServerCe;
 
 namespace QARobot
 {
     class DatabaseQuery
     {
+        private static readonly SqlCeConnection Connection = new SqlCeConnection("Data Source = database.sdf");
+        public static SqlCeConnection Connect
+        {
+            get
+            {
+                if (Connection.State == ConnectionState.Closed)
+                    Connection.Open();
 
-        public static void AddActorToDb(String name, String surname, String born, SqlCeConnection connection)
+                return Connection;
+            }
+        }
+
+
+        public static void CloseConnections()
+        {
+            if (Connect.State == ConnectionState.Open)
+                Connect.Close();
+        }
+
+        public static void AddActorToDb(string name, string surname, string born)
         {
             try
             {
-                string sql = "insert into actor(Name, Surname, Born) values(@name, @surname, @born)";
-                SqlCeCommand cmd = new SqlCeCommand(sql, connection);
+                var sql = "INSERT INTO actor(Name, Surname, Born) VALUES(@name, @surname, @born)";
+                var cmd = new SqlCeCommand(sql, Connect);
                 cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = name;
                 cmd.Parameters.Add("@surname", SqlDbType.NVarChar).Value = surname;
                 cmd.Parameters.Add("@born", SqlDbType.NVarChar).Value = born;
@@ -20,16 +39,17 @@ namespace QARobot
             }
             catch (Exception)
             {
+                CloseConnections();
                 Console.WriteLine("Count not insert." + name + ", " + surname + ", " + born);
             }
         }
 
-        public static void AddMovieToDb(String name, Decimal rating, String genre, String year, SqlCeConnection connection)
+        public static void AddMovieToDb(string name, Decimal rating, string genre, string year)
         {
             try
             {
-                string sql = "insert into Film(Name, Rating, Genre, Year) values(@name, @rating, @genre, @year)";
-                SqlCeCommand cmd = new SqlCeCommand(sql, connection);
+                var sql = "INESRT INTO Film(Name, Rating, Genre, Year) VALUES(@name, @rating, @genre, @year)";
+                var cmd = new SqlCeCommand(sql, Connect);
                 cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = name;
                 cmd.Parameters.Add("@rating", SqlDbType.Decimal, 2).Value = rating;
                 cmd.Parameters.Add("@genre", SqlDbType.NVarChar).Value = genre;
@@ -38,28 +58,28 @@ namespace QARobot
             }
             catch (Exception)
             {
+                CloseConnections();
                 Console.WriteLine("Count not insert." + name + ", " + rating + "," + genre + "," + year);
             }
 
         }
 
-
-        public static int SelectActorId(String name, String surname, SqlCeConnection connection)
+        public static int SelectActorId(string name, string surname)
         {
-            int value = 0;
+            var value = 0;
             try
             {
                 using (
-                    SqlCeCommand command =
+                    var command =
                         new SqlCeCommand(
-                            "SELECT [actorID] FROM [actor] where [name]='" + name + "' and [surname]='" + surname +
-                            "'", connection))
+                            "SELECT [actorID] FROM [actor] WHERE [name]='" + name + "' AND [surname]='" + surname +
+                            "'", Connect))
                 {
-                    using (SqlCeDataReader reader = command.ExecuteReader())
+                    using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            for (int i = 0; i < reader.FieldCount; i++)
+                            for (var i = 0; i < reader.FieldCount; i++)
                             {
                                 value = Convert.ToInt32(reader.GetValue(i));
                             }
@@ -69,155 +89,147 @@ namespace QARobot
             }
             catch (Exception)
             {
+                CloseConnections();
                 Console.WriteLine("Could not select " + name + " " + surname);
             }
             return value;
         }
 
 
-        public static int SelectFilmId(String name, SqlCeConnection connection)
+        public static int SelectFilmId(string name)
         {
-            int value = 0;
+            var value = 0;
             try
             {
-                using (SqlCeCommand command = new SqlCeCommand(
-                    "SELECT [filmId] FROM [Film] where [name]=@name", connection))
+                using (var command = new SqlCeCommand(
+                    "SELECT [filmId] FROM [Film] WHERE [name]=@name", Connect))
                 {
                     command.Parameters.Add(new SqlCeParameter("Name", name));
-                    SqlCeDataReader reader = command.ExecuteReader();
+                    var reader = command.ExecuteReader();
                     while (reader.Read())
                     {
                         value = reader.GetInt32(0);
-
                     }
                     command.ExecuteNonQuery();
-
                 }
-
             }
-            catch (Exception exc)
+            catch (Exception)
             {
+                CloseConnections();
                 Console.WriteLine("Could not select " + name);
             }
             return value;
         }
 
-        public static void SelectActorFilmId(int actorId, int filmId, SqlCeConnection connection)
+        public static void SelectActorFilmId(int actorId, int filmId)
         {
             try
             {
-                string sql = "insert into FilmaiToActor(actorId, filmId) values(@actorId, @filmId)";
-
-                SqlCeCommand cmd = new SqlCeCommand(sql, connection);
+                var sql = "INSERT INTO FilmaiToActor(actorId, filmId) VALUES(@actorId, @filmId)";
+                var cmd = new SqlCeCommand(sql, Connect);
                 cmd.Parameters.Add("@actorId", SqlDbType.NVarChar).Value = actorId;
                 cmd.Parameters.Add("@filmId", SqlDbType.NVarChar).Value = filmId;
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception exc)
+            catch (Exception)
             {
-
+                CloseConnections();
                 Console.WriteLine("Count not insert " + actorId + ", " + filmId);
             }
         }
 
-        public static void GetActorWithMostFilms(SqlCeConnection connection)
+        public static void GetActorWithMostFilms()
         {
             try
             {
-                using (SqlCeCommand command = new SqlCeCommand(
-                    "select  a.Name,a.surname, count(f.name) as filmuSk " +
-                    "from FilmaiToActor as fa " +
-                    "inner join Film as f on fa.filmId = f.filmId " +
-                    "inner join actor as a on fa.ActorId = a.actorId " +
-                    "group by   a.Name, a.surname " +
-                    "ORDER BY filmusk desc ", connection))
+                using (var command = new SqlCeCommand(@"
+                    SELECT  a.Name,a.surname, COUNT(f.name) AS filmuSk
+                    FROM FilmaiToActor AS fa 
+                    INNER JOIN Film AS f ON fa.filmId = f.filmId
+                    INNER JOIN actor AS a ON fa.ActorId = a.actorId 
+                    GROUP BY a.Name, a.surname
+                    ORDER BY filmusk DESC ", Connect))
                 {
-                    SqlCeDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    using (var reader = command.ExecuteReader())
                     {
-                        for (int i = 0; i < reader.FieldCount; i++)
+                        while (reader.Read())
                         {
-                            Console.Write(reader.GetValue(i) + " | ");
-
+                            for (var i = 0; i < reader.FieldCount; i++)
+                            {
+                                Console.Write(reader.GetValue(i) + " | ");
+                            }
+                            Console.WriteLine();
+                            break;
                         }
-                        Console.WriteLine();
-                        break;
-
+                        command.ExecuteNonQuery();
                     }
-
-                    command.ExecuteNonQuery();
-
                 }
-
             }
-            catch (Exception exc)
+            catch (Exception)
             {
+                CloseConnections();
                 Console.WriteLine("Could not select actor with most films");
             }
         }
 
-        public static void GetFilmWithBiggestRating(SqlCeConnection connection)
+        public static void GetFilmWithBiggestRating()
         {
             try
             {
-                using (SqlCeCommand command = new SqlCeCommand(
-                    "select  a.Name,a.surname,f.name, max(f.rating) as filmuRating\r\n" +
-                    "from FilmaiToActor as fa\r\n" +
-                    "inner join Film as f on fa.filmId = f.filmId \r\n" +
-                    "inner join actor as a on fa.ActorId=a.actorId \r\n" +
-                    "group by   a.Name,a.surname,f.name \r\n" +
-                    "ORDER BY filmuRating desc ", connection))
+                using (var command = new SqlCeCommand(@"
+                    SELECT a.Name, a.surname, f.name, MAX(f.rating) AS filmuRating
+                    FROM FilmaiToActor AS fa 
+                    INNER JOIN Film AS f ON fa.filmId = f.filmId  
+                    INNER JOIN actor AS a ON fa.ActorId=a.actorId 
+                    GROUP BY a.Name, a.surname, f.name 
+                    ORDER BY filmuRating DESC ", Connect))
                 {
-                    SqlCeDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    using (var reader = command.ExecuteReader())
                     {
-                        for (int i = 0; i < reader.FieldCount; i++)
+                        while (reader.Read())
                         {
-                            Console.Write(reader.GetValue(i) + " | ");
-
+                            for (var i = 0; i < reader.FieldCount; i++)
+                            {
+                                Console.Write(reader.GetValue(i) + " | ");
+                            }
+                            Console.WriteLine();
+                            break;
                         }
-                        Console.WriteLine();
-                        break;
-
+                        command.ExecuteNonQuery();
                     }
-
-                    command.ExecuteNonQuery();
-
                 }
-
             }
-            catch (Exception exc)
+            catch (Exception)
             {
+                CloseConnections();
                 Console.WriteLine("Could not select actor with most films");
             }
         }
 
-        public static void ActorsAndMovies(string query, SqlCeConnection connection)
+        public static void ActorsAndMovies(string query)
         {
             try
             {
-                using (SqlCeCommand command = new SqlCeCommand(
-                    query, connection))
+                using (var command = new SqlCeCommand(
+                    query, Connect))
                 {
-                    SqlCeDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
+                    using (var reader = command.ExecuteReader())
                     {
-                        for (int i = 0; i < reader.FieldCount; i++)
+                        while (reader.Read())
                         {
-                            Console.Write(reader.GetValue(i) + " | ");
-
+                            for (var i = 0; i < reader.FieldCount; i++)
+                            {
+                                Console.Write(reader.GetValue(i) + " | ");
+                            }
+                            Console.WriteLine();
                         }
-                        Console.WriteLine();
-
+                        command.ExecuteNonQuery();
                     }
-
-                    command.ExecuteNonQuery();
-
                 }
-
             }
-            catch (Exception exc)
+            catch (Exception)
             {
+                CloseConnections();
                 Console.WriteLine("Could not select actors");
             }
         }
