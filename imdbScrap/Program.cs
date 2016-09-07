@@ -23,11 +23,11 @@ namespace QARobot
 
                      "Angelina Jolie",
                       "Brad Pitt",
-                     "Johnny Depp",
-                      "Orlando Bloom",
-                      "Keira Knightley",
-                      "Leonardo DiCaprio",
-                      "Tom Hardy"
+                     //"Johnny Depp",
+                     // "Orlando Bloom",
+                     // "Keira Knightley",
+                     // "Leonardo DiCaprio",
+                     // "Tom Hardy"
 
                   };
 
