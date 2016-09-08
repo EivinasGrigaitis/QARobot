@@ -86,7 +86,16 @@ namespace QARobot
                         break;
                 }
             }
+            Console.WriteLine("\r\nHow many actors would you like to scrap?");
+            var quantity = Convert.ToInt32(Console.ReadKey().Key);
 
+            var actors = new List<string> { };
+            while (quantity > 0)
+            {
+                Console.WriteLine("Please enter actor Name and Surname (Separated with space): ");
+                actors.Add(Console.ReadKey().KeyChar.ToString());
+                quantity--;
+            }
             var swatch = new Stopwatch();
             //var aktoriai = new List<string>
             //      {
@@ -103,8 +112,8 @@ namespace QARobot
 
             swatch.Start();
 
-            
-            scraper.ScrapeActors(new List<string> { "Brad Pitt", "Angelina Jolie" });
+
+            scraper.ScrapeActors(actors);
 
 
             //var scraper = new Scraper(aktoriai); // Constructor accepts List<string> with actor names for scraping
