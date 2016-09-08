@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using System.Diagnostics;
 
 namespace QARobot
 {
@@ -13,21 +15,23 @@ namespace QARobot
     {
         private readonly IWebDriver _driver;
         private readonly string _baseUrl = "http://www.imdb.com";
-        readonly NumberFormatInfo _stdFormat = new NumberFormatInfo();
+        readonly NumberFormatInfo _decimalFormat = new NumberFormatInfo();
 
-        private readonly string _imdbApiTemplate = "http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q={0}+{1}";
+        private readonly string _imdbApiTemplate = 
+            "http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q={0}";
 
-        private readonly string _imdbActorFilmsTemplate ="http://www.imdb.com/filmosearch?explore=title_type&role={0}&title_type=movie";
+        private readonly string _imdbActorFilmsTemplate =
+            "http://www.imdb.com/filmosearch?explore=title_type&role={0}&title_type=movie";
 
         public HashSet<Actor> UniqueActors = new HashSet<Actor>();
         public HashSet<Film> UniqueFilms = new HashSet<Film>();
 
-        public ActorScraper()
+        public ActorScraper(FirefoxProfile profile)
         {
-            _driver = new FirefoxDriver();
+            _driver = new FirefoxDriver(profile);
             _driver.Manage().Window.Maximize();
 
-            _stdFormat.NumberDecimalSeparator = ".";
+            _decimalFormat.NumberDecimalSeparator = ".";
         }
 
          ~ActorScraper()
@@ -47,6 +51,8 @@ namespace QARobot
 
         public void ScrapeActors(List<string> actorNames)
         {
+            var variable = GetActorsNumbers(actorNames);
+
             foreach (var actor in actorNames)
             {
                 var actorName = actor.Split(' ')[0];
@@ -89,8 +95,8 @@ namespace QARobot
                         try
                         {
                             string filmRatingStr =
-                                filmElem.FindElement(By.ClassName("ratings-imdb-rating")).FindElement(By.TagName("strong")).Text;
-                            filmRating = decimal.Parse(filmRatingStr, _stdFormat);
+                                filmElem.FindElement(By.ClassName("ratings-imdb-rating")).FindElement(By.TagName("strong")).Text.Replace(',', '.');
+                            filmRating = decimal.Parse(filmRatingStr, _decimalFormat);
                         }
                         catch (NoSuchElementException) { Console.WriteLine(); }
 
@@ -135,6 +141,26 @@ namespace QARobot
                 UniqueActors.Add(currentActor);
             }
         }
+
+        private Dictionary<string, string> GetActorsNumbers(List<string> actorNames)
+        {
+            var actorDict = new Dictionary<string, string>();
+            var _client = new WebClient();
+
+            var sw = new Stopwatch();
+            sw.Start();
+
+            foreach (var actor in actorNames)
+            {
+                var suggestionJsonStr = _client.DownloadString(string.Format(_imdbApiTemplate, string.Join("+", actor.Split(' '))));
+                //actorDict.Add(actor, "0");
+            }
+
+            sw.Stop();
+            Console.WriteLine($"Scraping actor ids took: {sw.Elapsed}");
+
+            return actorDict;
+        } 
     }
 
     public class Actor
