@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System.Diagnostics;
+using NUnit.Framework.Constraints;
 
 namespace QARobot
 {
@@ -51,33 +52,26 @@ namespace QARobot
 
         public void ScrapeActors(List<string> actorNames)
         {
-            var variable = GetActorsNumbers(actorNames);
+            var actorDict = GetActorsNumbers(actorNames);
 
-            foreach (var actor in actorNames)
+            foreach (var actor in actorDict)
             {
-                var actorName = actor.Split(' ')[0];
-                var actorSurname = string.Join(" ", actor.Split(' ').Skip(1));
+                var actorFullname = actor.Key;
+                var actorName = actorFullname.Split(' ')[0];
+                var actorSurname = string.Join(" ", actorFullname.Split(' ').Skip(1));
 
-                // Get unique actor imdb number
+                var actorNumber = actor.Value;
+
                 _driver.Navigate().GoToUrl(string.Format(_imdbApiTemplate, actorName, actorSurname));
 
-                string jsonResponse = _driver.FindElement(By.TagName("body")).Text;
-                var parsedJson = JObject.Parse(jsonResponse);
-
-                string actorNumber = string.Empty;
-
+                _driver.Navigate().GoToUrl(_baseUrl + "/name/" + actorNumber);
+                string actorBirthday = "";
                 try
                 {
-                    actorNumber = parsedJson["name_popular"][0]["id"].Value<string>();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Could not find actor {actorName} {actorSurname}: {e}");
-                }
-
-                _driver.Navigate().GoToUrl(_baseUrl + "/name/" + actorNumber);
-                string actorBirthday =
+                    actorBirthday =
                     _driver.FindElement(By.XPath(".//*[@id=\'name-born-info\']/time")).GetAttribute("datetime");
+                }
+                catch (NoSuchElementException) { }
 
                 _driver.Navigate().GoToUrl(string.Format(_imdbActorFilmsTemplate, actorNumber));
 
@@ -98,7 +92,7 @@ namespace QARobot
                                 filmElem.FindElement(By.ClassName("ratings-imdb-rating")).FindElement(By.TagName("strong")).Text.Replace(',', '.');
                             filmRating = decimal.Parse(filmRatingStr, _decimalFormat);
                         }
-                        catch (NoSuchElementException) { Console.WriteLine(); }
+                        catch (NoSuchElementException) { }
 
                         string filmYear = null;
                         try
@@ -108,7 +102,7 @@ namespace QARobot
                                     By.XPath(".//*[contains(@class, \'lister-item-year text-muted unbold\')]")).Text;
                             filmYear = Regex.Match(text, @"\((\d{4})\)").Groups[1].Value;
                         }
-                        catch (NoSuchElementException) { Console.WriteLine(); }
+                        catch (NoSuchElementException) { }
 
                         string filmGenre = null;
                         try
@@ -116,10 +110,9 @@ namespace QARobot
                             filmGenre =
                                 filmElem.FindElement(By.XPath(".//*[contains(@class, \'genre\')]")).Text.Trim();
                         }
-                        catch (NoSuchElementException) { Console.WriteLine(); }
+                        catch (NoSuchElementException) { }
 
                         var currentFilm = new Film(filmName, filmRating, filmYear, filmGenre);
-                        Console.WriteLine(currentFilm);
 
                         currentActor.Films.Add(currentFilm);
                         UniqueFilms.Add(currentFilm);
@@ -128,7 +121,7 @@ namespace QARobot
                     try
                     {
                         _driver.FindElement(By.ClassName("next-page")).Click();
-                        System.Threading.Thread.Sleep(3000);
+                        System.Threading.Thread.Sleep(1500);
                     }
                     catch (NoSuchElementException)
                     {
@@ -147,20 +140,58 @@ namespace QARobot
             var actorDict = new Dictionary<string, string>();
             var _client = new WebClient();
 
-            var sw = new Stopwatch();
-            sw.Start();
 
             foreach (var actor in actorNames)
             {
                 var suggestionJsonStr = _client.DownloadString(string.Format(_imdbApiTemplate, string.Join("+", actor.Split(' '))));
-                //actorDict.Add(actor, "0");
+                var actorsJson = JObject.Parse(suggestionJsonStr);
+
+                try
+                {
+                    var pair = confirmActorPrompt(actorsJson);
+                    actorDict.Add(pair.Key, pair.Value);
+                    //Console.WriteLine("\r\nSorry, no more actors found...");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"\r\nSorry, couldn't find {actor} on IMDB... ");
+                }
             }
 
-            sw.Stop();
-            Console.WriteLine($"Scraping actor ids took: {sw.Elapsed}");
-
             return actorDict;
-        } 
+        }
+
+        private KeyValuePair<string, string> confirmActorPrompt(JObject json)
+        {
+            if (json.Count == 0)
+            {
+                throw new Exception("No actors found.");
+            }
+
+            foreach (var actorCategory in json.Children())
+            {
+                foreach (var entry in actorCategory.Children())
+                {
+                    var currentName = entry.First["name"].Value<string>();
+                    var currentContext = entry.First["description"].Value<string>();
+                    var currentId = entry.First["id"].Value<string>();
+
+                    bool confirmedChoice = false;
+                    while (!confirmedChoice)
+                    {
+                        Console.Write($"\r\nDid you mean: {currentName} ({currentContext})? y/n: ");
+                        var input = Console.ReadLine();
+                        if (input.StartsWith("y"))
+                        {
+                            return new KeyValuePair<string, string>(currentName, currentId);
+                        }
+                        confirmedChoice = true;
+                    }
+                }
+            }
+
+            throw new Exception("Actor not found.");
+        }
     }
 
     public class Actor
