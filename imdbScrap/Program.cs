@@ -39,7 +39,7 @@ namespace QARobot
         static void Main()
         {
 
-            Console.WriteLine(@"Welcome. Please enter number of which user agent you want to be used on scrapper:
+            Console.WriteLine(@"Welcome. Please select profile to use for scrapper:
                               1) Chrome on Linux;
                               2) Internet explorer on iOS;
                               3) Safari on Mac;");
@@ -47,28 +47,28 @@ namespace QARobot
             int selectionKey;
             int.TryParse(input, out selectionKey);
             bool done = false;
-
+            var scraper = new ActorScraper(new FirefoxProfile());
             while (!done)
             {
                 switch (selectionKey)
                 {
                     case 1:
-                        Console.WriteLine("\r\nYou have selected Chrome on Linux");
-                        ProfileManager.ChangeProfileUserAgent(ProfileManager.ChromeOnLinux);
+                        Console.WriteLine("\r\nYou have selected Chrome on Linux profile.");
+                        scraper = new ActorScraper(ProfileManager.ChangeProfileUserAgent(ProfileManager.ChromeOnLinux));
                         input = Console.ReadKey().KeyChar.ToString();
                         int.TryParse(input, out selectionKey);
                         done = true;
                         break;
                     case 2:
-                        Console.WriteLine("\r\nYou have selected Internet explorer on iOS");
-                        ProfileManager.ChangeProfileUserAgent(ProfileManager.IeOniOs);
+                        Console.WriteLine("\r\nYou have selected Internet explorer on iOSprofile.");
+                        scraper = new ActorScraper(ProfileManager.ChangeProfileUserAgent(ProfileManager.IeOniOs));
                         input = Console.ReadKey().KeyChar.ToString();
                         int.TryParse(input, out selectionKey);
                         done = true;
                         break;
                     case 3:
-                        Console.WriteLine("\r\nYou have selected Safari on Mac");
-                        ProfileManager.ChangeProfileUserAgent(ProfileManager.SafariOnMac);
+                        Console.WriteLine("\r\nYou have selected Safari on Macprofile.");
+                        scraper = new ActorScraper(ProfileManager.ChangeProfileUserAgent(ProfileManager.SafariOnMac));
                         input = Console.ReadKey().KeyChar.ToString();
                         int.TryParse(input, out selectionKey);
                         done = true;
@@ -97,7 +97,7 @@ namespace QARobot
 
             swatch.Start();
 
-            var scraper = new ActorScraper();
+            
             scraper.ScrapeActors(new List<string> { "Brad Pitt", "Angelina Jolie" });
 
 
