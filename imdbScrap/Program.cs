@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlServerCe;
 using System.Diagnostics;
+using OpenQA.Selenium.Firefox;
 
 namespace QARobot
 {
@@ -37,7 +38,7 @@ namespace QARobot
 
         static void Main()
         {
-            
+
             Console.WriteLine(@"Welcome. Please enter number of which user agent you want to be used on scrapper:
                               1) Chrome on Linux;
                               2) Internet explorer on iOS;
@@ -53,18 +54,21 @@ namespace QARobot
                 {
                     case 1:
                         Console.WriteLine("\r\nYou have selected Chrome on Linux");
+                        ProfileManager.ChangeProfileUserAgent(ProfileManager.ChromeOnLinux);
                         input = Console.ReadKey().KeyChar.ToString();
                         int.TryParse(input, out selectionKey);
                         done = true;
                         break;
                     case 2:
                         Console.WriteLine("\r\nYou have selected Internet explorer on iOS");
+                        ProfileManager.ChangeProfileUserAgent(ProfileManager.IeOniOs);
                         input = Console.ReadKey().KeyChar.ToString();
                         int.TryParse(input, out selectionKey);
                         done = true;
                         break;
                     case 3:
                         Console.WriteLine("\r\nYou have selected Safari on Mac");
+                        ProfileManager.ChangeProfileUserAgent(ProfileManager.SafariOnMac);
                         input = Console.ReadKey().KeyChar.ToString();
                         int.TryParse(input, out selectionKey);
                         done = true;

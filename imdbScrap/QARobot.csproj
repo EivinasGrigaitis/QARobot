@@ -89,6 +89,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scraper.cs" />
+    <Compile Include="UserAgent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
