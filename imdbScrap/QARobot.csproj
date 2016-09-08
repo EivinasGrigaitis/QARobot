@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActorScraper.cs" />
+    <Compile Include="CookieProfile.cs" />
     <Compile Include="DatabaseQuery.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
