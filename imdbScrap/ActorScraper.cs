@@ -18,7 +18,7 @@ namespace QARobot
         private readonly string _baseUrl = "http://www.imdb.com";
         readonly NumberFormatInfo _decimalFormat = new NumberFormatInfo();
 
-        private readonly string _imdbApiTemplate = 
+        static readonly string _imdbApiTemplate = 
             "http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q={0}";
 
         private readonly string _imdbActorFilmsTemplate =
@@ -50,10 +50,8 @@ namespace QARobot
             return UniqueFilms.ToList();
         }
 
-        public void ScrapeActors(List<string> actorNames)
+        public void ScrapeActors(Dictionary<string, string> actorDict)
         {
-            var actorDict = GetActorsNumbers(actorNames);
-
             foreach (var actor in actorDict)
             {
                 var actorFullname = actor.Key;
@@ -135,60 +133,72 @@ namespace QARobot
             }
         }
 
-        private Dictionary<string, string> GetActorsNumbers(List<string> actorNames)
+        //private Dictionary<string, string> GetActorsNumbers(List<string> actorNames)
+        //{
+        //    var actorDict = new Dictionary<string, string>();
+        //    var _client = new WebClient();
+
+
+        //    foreach (var actor in actorNames)
+        //    {
+        //        var suggestionJsonStr = _client.DownloadString(string.Format(_imdbApiTemplate, string.Join("+", actor.Split(' '))));
+        //        var actorsJson = JObject.Parse(suggestionJsonStr);
+
+        //        try
+        //        {
+        //            var pair = confirmActorPrompt(actorsJson);
+        //            actorDict.Add(pair.Key, pair.Value);
+        //            //Console.WriteLine("\r\nSorry, no more actors found...");
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            Console.WriteLine($"\r\nSorry, couldn't find {actor} on IMDB... ");
+        //        }
+        //    }
+
+        //    return actorDict;
+        //}
+
+        public static KeyValuePair<string, string> confirmActorPrompt(string actor)
         {
-            var actorDict = new Dictionary<string, string>();
             var _client = new WebClient();
+            var suggestionJsonStr = _client.DownloadString(string.Format(_imdbApiTemplate, string.Join("+", actor.Split(' '))));
+            var actorsJson = JObject.Parse(suggestionJsonStr);
 
 
-            foreach (var actor in actorNames)
-            {
-                var suggestionJsonStr = _client.DownloadString(string.Format(_imdbApiTemplate, string.Join("+", actor.Split(' '))));
-                var actorsJson = JObject.Parse(suggestionJsonStr);
-
-                try
-                {
-                    var pair = confirmActorPrompt(actorsJson);
-                    actorDict.Add(pair.Key, pair.Value);
-                    //Console.WriteLine("\r\nSorry, no more actors found...");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"\r\nSorry, couldn't find {actor} on IMDB... ");
-                }
-            }
-
-            return actorDict;
-        }
-
-        private KeyValuePair<string, string> confirmActorPrompt(JObject json)
-        {
-            if (json.Count == 0)
+            if (actorsJson.Count == 0)
             {
                 throw new Exception("No actors found.");
             }
-
-            foreach (var actorCategory in json.Children())
+            try
             {
-                foreach (var entry in actorCategory.Children())
+                foreach (var actorCategory in actorsJson.Children())
                 {
-                    var currentName = entry.First["name"].Value<string>();
-                    var currentContext = entry.First["description"].Value<string>();
-                    var currentId = entry.First["id"].Value<string>();
-
-                    bool confirmedChoice = false;
-                    while (!confirmedChoice)
+                    foreach (var entry in actorCategory.Children())
                     {
-                        Console.Write($"\r\nDid you mean: {currentName} ({currentContext})? y/n: ");
-                        var input = Console.ReadLine();
-                        if (input.StartsWith("y"))
+                        var currentName = entry.First["name"].Value<string>();
+                        var currentContext = entry.First["description"].Value<string>();
+                        var currentId = entry.First["id"].Value<string>();
+
+                        bool confirmedChoice = false;
+                        while (!confirmedChoice)
                         {
-                            return new KeyValuePair<string, string>(currentName, currentId);
+                            Console.Write($"\r\nDid you mean: {currentName} ({currentContext})? y/n: ");
+                            var input = Console.ReadLine();
+                            if (input.StartsWith("y"))
+                            {
+                                return new KeyValuePair<string, string>(currentName, currentId);
+                            }
+                            confirmedChoice = true;
                         }
-                        confirmedChoice = true;
                     }
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine($"\r\nSorry, couldn't find {actor} on IMDB... ");
+            }
+
 
             throw new Exception("Actor not found.");
         }

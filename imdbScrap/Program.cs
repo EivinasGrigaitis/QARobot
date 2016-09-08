@@ -90,12 +90,12 @@ namespace QARobot
             var quantity = Convert.ToInt32(Console.ReadKey().Key);
 
             var actors = new List<string> { };
-            while (quantity > 0)
+            for (int i = 0; i < quantity; i++)
             {
                 Console.WriteLine("Please enter actor Name and Surname (Separated with space): ");
                 actors.Add(Console.ReadKey().KeyChar.ToString());
-                quantity--;
             }
+          
             var swatch = new Stopwatch();
             //var aktoriai = new List<string>
             //      {
@@ -113,7 +113,13 @@ namespace QARobot
             swatch.Start();
 
 
-            scraper.ScrapeActors(actors);
+            var actorDict = new Dictionary<string, string>();
+            // Kiekviena karta, kai useris enterina aktoriu, padaryti:
+            // try
+            //{
+            //    actorDict.Add(ActorScraper.confirmActorPrompt(actorName));
+            //}
+            scraper.ScrapeActors(actorDict);
 
 
             //var scraper = new Scraper(aktoriai); // Constructor accepts List<string> with actor names for scraping
