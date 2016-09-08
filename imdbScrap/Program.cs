@@ -37,6 +37,46 @@ namespace QARobot
 
         static void Main()
         {
+            
+            Console.WriteLine(@"Welcome. Please enter number of which user agent you want to be used on scrapper:
+                              1) Chrome on Linux;
+                              2) Internet explorer on iOS;
+                              3) Safari on Mac;");
+            var input = Console.ReadKey().KeyChar.ToString();
+            int selectionKey;
+            int.TryParse(input, out selectionKey);
+            bool done = false;
+
+            while (!done)
+            {
+                switch (selectionKey)
+                {
+                    case 1:
+                        Console.WriteLine("\r\nYou have selected Chrome on Linux");
+                        input = Console.ReadKey().KeyChar.ToString();
+                        int.TryParse(input, out selectionKey);
+                        done = true;
+                        break;
+                    case 2:
+                        Console.WriteLine("\r\nYou have selected Internet explorer on iOS");
+                        input = Console.ReadKey().KeyChar.ToString();
+                        int.TryParse(input, out selectionKey);
+                        done = true;
+                        break;
+                    case 3:
+                        Console.WriteLine("\r\nYou have selected Safari on Mac");
+                        input = Console.ReadKey().KeyChar.ToString();
+                        int.TryParse(input, out selectionKey);
+                        done = true;
+                        break;
+                    default:
+                        Console.WriteLine("\r\nIncorrect value. Please enter 1,2 or 3.");
+                        input = Console.ReadKey().KeyChar.ToString();
+                        int.TryParse(input, out selectionKey);
+                        break;
+                }
+            }
+
             var swatch = new Stopwatch();
             //var aktoriai = new List<string>
             //      {
@@ -70,7 +110,7 @@ namespace QARobot
             //var uniqueActors = new List<Actor>();
 
             Console.WriteLine("Data transfer to database");
-           
+
             foreach (var actor in scraper.UniqueActors)
             {
                 DatabaseQuery.AddActorToDb(actor.Name, actor.Surname, actor.Born);
