@@ -59,15 +59,18 @@ namespace QARobot
                 }
             }
             Console.WriteLine("\r\nHow many actors would you like to scrap?");
-            var quantity = Convert.ToInt32(Console.ReadKey().Key);
+            var readQuantity = Console.ReadKey().KeyChar.ToString();
+            int quantity;
+            int.TryParse(readQuantity, out quantity);
 
-            var actors = new List<string> { };
+            var actorDict = new Dictionary<string, string>();
+
             for (int i = 0; i < quantity; i++)
             {
-                Console.WriteLine("Please enter actor Name and Surname (Separated with space): ");
-                actors.Add(Console.ReadKey().KeyChar.ToString());
+                Console.WriteLine("\r\nPlease enter actor Name and Surname (Separated with space): ");
+                actorDict.Add(Console.ReadLine(), "");
             }
-          
+
             var swatch = new Stopwatch();
             //var aktoriai = new List<string>
             //      {
@@ -84,8 +87,6 @@ namespace QARobot
 
             swatch.Start();
 
-
-            var actorDict = new Dictionary<string, string>();
             // Kiekviena karta, kai useris enterina aktoriu, padaryti:
             // try
             //{
