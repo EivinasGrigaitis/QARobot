@@ -59,13 +59,9 @@ namespace QARobot
                 }
             }
             Console.WriteLine("\r\nHow many actors would you like to scrap?");
-            var readQuantity = Console.ReadKey().KeyChar.ToString();
-            int quantity;
-            int.TryParse(readQuantity, out quantity);
-
+            input = Console.ReadKey().KeyChar.ToString();
             var actorDict = new Dictionary<string, string>();
-
-            for (int i = 0; i < quantity; i++)
+            for (int i = 0; i < Convert.ToInt32(input); i++)
             {
                 Console.WriteLine("\r\nPlease enter actor Name and Surname (Separated with space): ");
                 actorDict.Add(Console.ReadLine(), "");
