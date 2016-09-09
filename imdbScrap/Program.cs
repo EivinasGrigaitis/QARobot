@@ -8,34 +8,6 @@ namespace QARobot
 {
     class Program
     {
-        //TODO pasidaryti 1 universalia uzklausa skirtingiem aktoriam uzklausas
-        //private static string BradAndJolie = @"
-        //    SELECT  f.name, f.year, f.rating
-        //    FROM FilmaiToActor AS fa
-        //    INNER JOIN Film AS f ON fa.filmId = f.filmId
-        //    INNER JOIN actor AS a ON fa.ActorId=a.actorId
-        //    WHERE (a.name = \'Brad\' AND a.surname = \'Pitt\')  OR (a.name = \'Angelina\' AND a.surname = \'Jolie\')
-        //    GROUP BY  f.name,f.year, f.rating  
-        //    HAVING COUNT(*) >1";
-
-        //private static string OrlandoBloomKeiraAndDepp = @"
-        //    SELECT  f.name, f.year, f.rating
-        //    FROM FilmaiToActor AS fa
-        //    INNER JOIN Film AS f ON fa.filmId = f.filmId
-        //    INNER JOIN actor AS a ON fa.ActorId=a.actorId 
-        //    WHERE (a.name = \'Johnny\' AND a.surname = \'Depp\')  OR (a.name = \'Orlando\' AND a.surname = \'Bloom\') OR (a.name = \'Keira\' AND a.surname = \'Knightley\')
-        //    GROUP BY  f.name, f.year, f.rating
-        //    HAVING COUNT(*) >1";
-
-        //private static string TomHardyAndDiCaprio = @"
-        //    SELECT  f.name, f.year, f.rating
-        //    FROM FilmaiToActor AS fa
-        //    INNER JOIN Film AS f ON fa.filmId = f.filmId
-        //    INNER JOIN actor AS a ON fa.ActorId=a.actorId 
-        //    WHERE (a.name = \'Leonardo\' AND a.surname = \'DiCaprio\')  OR (a.name = \'Tom\' AND a.surname = \'Hardy\') 
-        //    GROUP BY  f.name, f.year, f.rating 
-        //    HAVING COUNT(*) >1";
-
         static void Main()
         {
 
@@ -138,22 +110,22 @@ namespace QARobot
 
             foreach (var actor in scraper.UniqueActors)
             {
-                DatabaseQuery.AddActorToDb(actor.Name, actor.Surname, actor.Born);
+                Database.AddActorToDb(actor.Name, actor.Surname, actor.Born);
             }
 
             foreach (var movie in scraper.UniqueFilms)
             {
-                DatabaseQuery.AddMovieToDb(movie.Name, movie.Rating, movie.Genre, movie.Year);
+                Database.AddMovieToDb(movie.Name, movie.Rating, movie.Genre, movie.Year);
             }
 
             Console.WriteLine("Actors and films query");
             foreach (var actor in scraper.UniqueActors)
             {
-                int actorId = DatabaseQuery.SelectActorId(actor.Name, actor.Surname);
+                int actorId = Database.SelectActorId(actor.Name, actor.Surname);
                 foreach (var film in actor.Films)
                 {
-                    int movieId = DatabaseQuery.SelectFilmId(film.Name);
-                    DatabaseQuery.SelectActorFilmId(actorId, movieId);
+                    int movieId = Database.SelectFilmId(film.Name);
+                    Database.SelectActorFilmId(actorId, movieId);
                 }
             }
             swatch.Stop();
@@ -162,10 +134,10 @@ namespace QARobot
             Console.WriteLine("Press any key to start query");
             Console.ReadLine();
             Console.Write("Actor with most films : ");
-            DatabaseQuery.GetActorWithMostFilms();
+            Database.GetActorWithMostFilms();
             Console.ReadLine();
             Console.Write("Actor with biggest film rating : ");
-            DatabaseQuery.GetFilmWithBiggestRating();
+            Database.GetFilmWithBiggestRating();
             Console.ReadLine();
 
             //TODO pasidaryti universalias uzklausas
@@ -178,7 +150,7 @@ namespace QARobot
             //Console.WriteLine("Leonardo DiCaprio and Tom Hardy movies ::");
             //DatabaseQuery.ActorsAndMovies(TomHardyAndDiCaprio);
             //Console.ReadLine();
-            DatabaseQuery.CloseConnections();
+            Database.CloseConnections();
         }
     }
 }

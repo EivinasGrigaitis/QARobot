@@ -5,9 +5,9 @@ using System.Data.SqlServerCe;
 
 namespace QARobot
 {
-    class DatabaseQuery
+    class Database
     {
-        private static readonly SqlCeConnection Connection = new SqlCeConnection(@"Data Source = database.sdf");
+        private static readonly SqlCeConnection Connection = new SqlCeConnection(SqlQueries.DbConnection);
         public static SqlCeConnection Connect
         {
             get
@@ -25,12 +25,12 @@ namespace QARobot
             if (Connect.State == ConnectionState.Open)
                 Connect.Close();
         }
-        public static void AddActorToDb(String name, String surname, String born)
+
+        public static void AddActorToDb(string name, string surname, string born)
         {
             try
             {
-                var sql = "INSERT INTO actor(Name, Surname, Born) VALUES(@name, @surname, @born)";
-                var cmd = new SqlCeCommand(sql, Connect);
+                var cmd = new SqlCeCommand(SqlQueries.AddActorToDb, Connect);
                 cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = name;
                 cmd.Parameters.Add("@surname", SqlDbType.NVarChar).Value = surname;
                 cmd.Parameters.Add("@born", SqlDbType.NVarChar).Value = born;
@@ -43,12 +43,11 @@ namespace QARobot
             }
         }
 
-        public static void AddMovieToDb(String name, Decimal rating, String genre, String year)
+        public static void AddMovieToDb(string name, decimal rating, string genre, string year)
         {
             try
             {
-                var sql = "INSERT INTO Film(Name, Rating, Genre, Year) VALUES(@name, @rating, @genre, @year)";
-                var cmd = new SqlCeCommand(sql, Connect);
+                var cmd = new SqlCeCommand(SqlQueries.AddMovieToDb, Connect);
                 cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = name;
                 cmd.Parameters.Add("@rating", SqlDbType.Decimal, 2).Value = rating;
                 cmd.Parameters.Add("@genre", SqlDbType.NVarChar).Value = genre;
@@ -63,16 +62,14 @@ namespace QARobot
         }
 
 
-        public static int SelectActorId(String name, String surname)
+        public static int SelectActorId(string name, string surname)
         {
             var value = 0;
             try
             {
                 using (
                     var command =
-                        new SqlCeCommand(
-                            "SELECT [actorID] FROM [actor] WHERE [name]='" + name + "' AND [surname]='" + surname +
-                            "'", Connect))
+                        new SqlCeCommand(SqlQueries.SelectActorId(name, surname), Connect))
                 {
                     using (var reader = command.ExecuteReader())
                     {
@@ -100,8 +97,7 @@ namespace QARobot
             var value = 0;
             try
             {
-                using (var command = new SqlCeCommand(
-                    "SELECT [filmId] FROM [Film] WHERE [name]=@name", Connect))
+                using (var command = new SqlCeCommand(SqlQueries.SelectMovieId, Connect))
                 {
                     command.Parameters.Add(new SqlCeParameter("Name", name));
                     var reader = command.ExecuteReader();
@@ -124,8 +120,7 @@ namespace QARobot
         {
             try
             {
-                var sql = "INSERT INTO FilmaiToActor(actorId, filmId) VALUES(@actorId, @filmId)";
-                var cmd = new SqlCeCommand(sql, Connect);
+                var cmd = new SqlCeCommand(SqlQueries.SelectActorMovieId, Connect);
                 cmd.Parameters.Add("@actorId", SqlDbType.NVarChar).Value = actorId;
                 cmd.Parameters.Add("@filmId", SqlDbType.NVarChar).Value = filmId;
                 cmd.ExecuteNonQuery();
@@ -141,13 +136,7 @@ namespace QARobot
         {
             try
             {
-                using (var command = new SqlCeCommand(@"
-                    SELECT  a.Name,a.surname, COUNT(f.name) AS filmuSk
-                    FROM FilmaiToActor AS fa 
-                    INNER JOIN Film AS f ON fa.filmId = f.filmId
-                    INNER JOIN actor AS a ON fa.ActorId = a.actorId 
-                    GROUP BY a.Name, a.surname
-                    ORDER BY filmuSk DESC ", Connect))
+                using (var command = new SqlCeCommand(SqlQueries.GetActorWithMostFilms, Connect))
                 {
                     using (var reader = command.ExecuteReader())
                     {
@@ -175,13 +164,7 @@ namespace QARobot
         {
             try
             {
-                using (var command = new SqlCeCommand(@"
-                    SELECT a.Name, a.surname, f.name, MAX(f.rating) AS filmuRating
-                    FROM FilmaiToActor AS fa 
-                    INNER JOIN Film AS f ON fa.filmId = f.filmId  
-                    INNER JOIN actor AS a ON fa.ActorId=a.actorId 
-                    GROUP BY a.Name, a.surname, f.name 
-                    ORDER BY filmuRating DESC ", Connect))
+                using (var command = new SqlCeCommand(SqlQueries.GetFilmWithBiggestRating, Connect))
                 {
                     using (var reader = command.ExecuteReader())
                     {
