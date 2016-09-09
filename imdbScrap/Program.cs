@@ -21,34 +21,34 @@ namespace QARobot
             int selectionKey;
             int.TryParse(input, out selectionKey);
             bool done = false;
-            var scraper = new ActorScraper(new FirefoxProfile());
+            var _profile = new FirefoxProfile();
             while (!done)
             {
                 switch (selectionKey)
                 {
                     case 1:
                         Console.WriteLine("\r\nYou have selected Chrome on Linux profile.");
-                        scraper = new ActorScraper(ProfileManager.ChangeProfileUserAgent(ProfileManager.ChromeOnLinuxProfile));
+                        _profile = ProfileManager.ChangeProfileUserAgent(ProfileManager.ChromeOnLinuxProfile);
                         done = true;
                         break;
                     case 2:
                         Console.WriteLine("\r\nYou have selected Internet explorer on iOS profile.");
-                        scraper = new ActorScraper(ProfileManager.ChangeProfileUserAgent(ProfileManager.IeOniOsProfile));
+                        _profile = ProfileManager.ChangeProfileUserAgent(ProfileManager.IeOniOsProfile);
                         done = true;
                         break;
                     case 3:
                         Console.WriteLine("\r\nYou have selected Safari on Mac profile.");
-                        scraper = new ActorScraper(ProfileManager.ChangeProfileUserAgent(ProfileManager.SafariOnMacProfile));
+                        _profile = ProfileManager.ChangeProfileUserAgent(ProfileManager.SafariOnMacProfile);
                         done = true;
                         break;
                     case 4:
                         Console.WriteLine("\r\nYou have selected user default profile.");
-                        scraper = new ActorScraper(ProfileManager.CookieProfiles(ProfileManager.DefaultProfile));
+                        _profile = ProfileManager.CookieProfiles(ProfileManager.DefaultProfile);
                         done = true;
                         break;
                     case 5:
                         Console.WriteLine("\r\nYou have selected selenium profile.");
-                        scraper = new ActorScraper(ProfileManager.CookieProfiles(ProfileManager.EmptyProfile));
+                        _profile = ProfileManager.CookieProfiles(ProfileManager.EmptyProfile);
                         done = true;
                         break;
                     default:
@@ -58,6 +58,8 @@ namespace QARobot
                         break;
                 }
             }
+
+            var scraper = new ActorScraper(_profile);
             Console.WriteLine("\r\nHow many actors would you like to scrap?");
             var readQuantity = Console.ReadKey().KeyChar.ToString();
             int quantity;
@@ -65,11 +67,24 @@ namespace QARobot
 
             var actorDict = new Dictionary<string, string>();
 
+            
             for (int i = 0; i < quantity; i++)
             {
                 Console.WriteLine("\r\nPlease enter actor Name and Surname (Separated with space): ");
-                actorDict.Add(Console.ReadLine(), "");
+                var actorName = Console.ReadLine();
+                try
+                {
+                    var nameNumPair = ActorScraper.confirmActorPrompt(actorName);
+                    actorDict.Add(nameNumPair.Key, nameNumPair.Value);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Sorry, couldn't find actor.");
+                    i--;
+                }
             }
+
+            scraper.ScrapeActors(actorDict);
 
             var swatch = new Stopwatch();
             //var aktoriai = new List<string>
@@ -87,12 +102,8 @@ namespace QARobot
 
             swatch.Start();
 
-            // Kiekviena karta, kai useris enterina aktoriu, padaryti:
-            // try
-            //{
-            //    actorDict.Add(ActorScraper.confirmActorPrompt(actorName));
-            //}
-            scraper.ScrapeActors(actorDict);
+            //Kiekviena karta, kai useris enterina aktoriu, padaryti:
+            
 
 
             //var scraper = new Scraper(aktoriai); // Constructor accepts List<string> with actor names for scraping
