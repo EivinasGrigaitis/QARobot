@@ -1,7 +1,13 @@
-﻿namespace QARobot
+﻿using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+
+namespace QARobot
 {
     class SqlQueries
     {
+        public static Dictionary<string, string> test = new Dictionary<string, string>();
         public static string DbConnection = @"
                     Data Source = database.sdf";
 
@@ -46,6 +52,30 @@
                 WHERE [name]='" + name + "' " +
                    "AND [surname]='" + surname + "'";
         }
+
+        public static string UniversalString()
+        {
+            SqlCommand cmd = new SqlCommand();
+            StringBuilder sqlBuilder = new StringBuilder();
+            sqlBuilder.Append("SELECT  f.name, f.year, f.rating  " +
+                              "FROM FilmaiToActor AS fa " +
+                              "INNER JOIN Film AS f ON fa.filmId = f.filmId " +
+                              "INNER JOIN actor AS a ON fa.ActorId=a.actorId ");
+
+            var i = 1;
+            foreach (string item in test.Keys)
+            {
+                sqlBuilder.Append(i == 1 ? " WHERE " : " OR ");
+                var paramName =  item.Split(' ')[0].ToString();
+                var paramSurname = item.Split(' ')[1];
+                sqlBuilder.AppendFormat("(a.Name ='{0}' AND a.Surname = '{1}' )", paramName, paramSurname);
+                cmd.Parameters.AddWithValue(paramName, "%" + item + "%");
+                cmd.Parameters.AddWithValue(paramSurname, "%" + item + "%");
+                i++;
+            }
+            return cmd.CommandText = sqlBuilder.ToString() + "GROUP BY  f.name,f.year, f.rating " +
+                                     "HAVING COUNT(*) >1";
+     }
         //TODO universal ActorsAndMovies query
         //private static string BradAndJolie = @"
         //    SELECT  f.name, f.year, f.rating

@@ -83,9 +83,10 @@ namespace QARobot
                     i--;
                 }
             }
-
+            
             scraper.ScrapeActors(actorDict);
-
+            SqlQueries.test = actorDict;
+          //  SqlQueries.UniversalString();
             var swatch = new Stopwatch();
             //var aktoriai = new List<string>
             //      {
@@ -150,19 +151,20 @@ namespace QARobot
             Console.ReadLine();
             Console.Write("Actor with biggest film rating : ");
             Database.GetFilmWithBiggestRating();
-            Console.ReadLine();
+           
 
             //TODO pasidaryti universalias uzklausas
-            //Console.WriteLine("Brad Pitt and Angelina Jolie Pitt movies :");
-            //DatabaseQuery.ActorsAndMovies(BradAndJolie);
+            Console.WriteLine("Universal Query result (actors movies) :");
+            Database.ActorsAndMovies(SqlQueries.UniversalString());
             //Console.ReadLine();
             //Console.WriteLine("Orlando Bloom, Keira Knighley, Johny Depp movies :");
             //DatabaseQuery.ActorsAndMovies(OrlandoBloomKeiraAndDepp);
             //Console.ReadLine();
             //Console.WriteLine("Leonardo DiCaprio and Tom Hardy movies ::");
             //DatabaseQuery.ActorsAndMovies(TomHardyAndDiCaprio);
-            //Console.ReadLine();
+            //
             Database.CloseConnections();
+            Console.ReadLine();
         }
     }
 }
