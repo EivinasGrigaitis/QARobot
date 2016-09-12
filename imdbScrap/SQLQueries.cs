@@ -7,7 +7,7 @@ namespace QARobot
 {
     class SqlQueries
     {
-        public static Dictionary<string, string> test = new Dictionary<string, string>();
+        public static Dictionary<string, string> Dict = new Dictionary<string, string>();
         public static string DbConnection = @"
                     Data Source = database.sdf";
 
@@ -55,53 +55,27 @@ namespace QARobot
 
         public static string UniversalString()
         {
-            SqlCommand cmd = new SqlCommand();
-            StringBuilder sqlBuilder = new StringBuilder();
+            var cmd = new SqlCommand();
+            var sqlBuilder = new StringBuilder();
             sqlBuilder.Append("SELECT  f.name, f.year, f.rating  " +
                               "FROM FilmaiToActor AS fa " +
                               "INNER JOIN Film AS f ON fa.filmId = f.filmId " +
                               "INNER JOIN actor AS a ON fa.ActorId=a.actorId ");
 
             var i = 1;
-            foreach (string item in test.Keys)
+            foreach (var item in Dict.Keys)
             {
                 sqlBuilder.Append(i == 1 ? " WHERE " : " OR ");
-                var paramName =  item.Split(' ')[0].ToString();
+                var paramName =  item.Split(' ')[0];
                 var paramSurname = item.Split(' ')[1];
                 sqlBuilder.AppendFormat("(a.Name ='{0}' AND a.Surname = '{1}' )", paramName, paramSurname);
                 cmd.Parameters.AddWithValue(paramName, "%" + item + "%");
                 cmd.Parameters.AddWithValue(paramSurname, "%" + item + "%");
                 i++;
             }
-            return cmd.CommandText = sqlBuilder.ToString() + "GROUP BY  f.name,f.year, f.rating " +
+            return cmd.CommandText = sqlBuilder + "GROUP BY  f.name,f.year, f.rating " +
                                      "HAVING COUNT(*) >1";
      }
-        //TODO universal ActorsAndMovies query
-        //private static string BradAndJolie = @"
-        //    SELECT  f.name, f.year, f.rating
-        //    FROM FilmaiToActor AS fa
-        //    INNER JOIN Film AS f ON fa.filmId = f.filmId
-        //    INNER JOIN actor AS a ON fa.ActorId=a.actorId
-        //    WHERE (a.name = \'Brad\' AND a.surname = \'Pitt\')  OR (a.name = \'Angelina\' AND a.surname = \'Jolie\')
-        //    GROUP BY  f.name,f.year, f.rating  
-        //    HAVING COUNT(*) >1";
-
-        //private static string OrlandoBloomKeiraAndDepp = @"
-        //    SELECT  f.name, f.year, f.rating
-        //    FROM FilmaiToActor AS fa
-        //    INNER JOIN Film AS f ON fa.filmId = f.filmId
-        //    INNER JOIN actor AS a ON fa.ActorId=a.actorId 
-        //    WHERE (a.name = \'Johnny\' AND a.surname = \'Depp\')  OR (a.name = \'Orlando\' AND a.surname = \'Bloom\') OR (a.name = \'Keira\' AND a.surname = \'Knightley\')
-        //    GROUP BY  f.name, f.year, f.rating
-        //    HAVING COUNT(*) >1";
-
-        //private static string TomHardyAndDiCaprio = @"
-        //    SELECT  f.name, f.year, f.rating
-        //    FROM FilmaiToActor AS fa
-        //    INNER JOIN Film AS f ON fa.filmId = f.filmId
-        //    INNER JOIN actor AS a ON fa.ActorId=a.actorId 
-        //    WHERE (a.name = \'Leonardo\' AND a.surname = \'DiCaprio\')  OR (a.name = \'Tom\' AND a.surname = \'Hardy\') 
-        //    GROUP BY  f.name, f.year, f.rating 
-        //    HAVING COUNT(*) >1";
+        
     }
 }

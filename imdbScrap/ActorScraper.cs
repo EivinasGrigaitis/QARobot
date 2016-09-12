@@ -201,6 +201,34 @@ namespace QARobot
 
             throw new Exception("Actor not found.");
         }
+
+        public static Dictionary<string,string> EnterActors()
+        {
+            var readQuantity = Console.ReadKey().KeyChar.ToString();
+            int quantity;
+            int.TryParse(readQuantity, out quantity);
+
+            var actorDict = new Dictionary<string, string>();
+
+
+            for (var i = 0; i < quantity; i++)
+            {
+                Console.WriteLine("\r\nPlease enter actor Name and Surname (Separated with space): ");
+                var actorName = Console.ReadLine();
+                try
+                {
+                    var nameNumPair = ActorScraper.confirmActorPrompt(actorName);
+                    actorDict.Add(nameNumPair.Key, nameNumPair.Value);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Sorry, couldn't find actor.");
+                    i--;
+                }
+            }
+          
+            return actorDict;
+        }
     }
 
     public class Actor

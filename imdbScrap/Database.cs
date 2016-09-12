@@ -215,5 +215,29 @@ namespace QARobot
                 Console.WriteLine("Could not select actors");
             }
         }
+
+        public static void FillDatabaseInfo(ActorScraper scraper)
+        {
+            foreach (var actor in scraper.UniqueActors)
+            {
+                AddActorToDb(actor.Name, actor.Surname, actor.Born);
+            }
+
+            foreach (var movie in scraper.UniqueFilms)
+            {
+                AddMovieToDb(movie.Name, movie.Rating, movie.Genre, movie.Year);
+            }
+
+            Console.WriteLine("Actors and films query");
+            foreach (var actor in scraper.UniqueActors)
+            {
+                int actorId = SelectActorId(actor.Name, actor.Surname);
+                foreach (var film in actor.Films)
+                {
+                    int movieId = SelectFilmId(film.Name);
+                    SelectActorFilmId(actorId, movieId);
+                }
+            }
+        }
     }
 }

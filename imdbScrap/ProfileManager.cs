@@ -29,14 +29,59 @@ namespace QARobot
         public static FirefoxProfile CookieProfiles(string cookieProfile)
         {
             var profile = new FirefoxProfile();
-            if (cookieProfile != String.Empty)
+            if (cookieProfile != string.Empty)
             {
-                FirefoxProfileManager myProfile = new FirefoxProfileManager();
+                var myProfile = new FirefoxProfileManager();
                 profile = myProfile.GetProfile(cookieProfile);
 
             }
             return profile;
         }
 
+        public static FirefoxProfile GetProfile()
+        {
+            var input = Console.ReadKey().KeyChar.ToString();
+            int selectionKey;
+            int.TryParse(input, out selectionKey);
+            bool done = false;
+            var profile = new FirefoxProfile();
+            while (!done)
+            {
+                switch (selectionKey)
+                {
+                    case 1:
+                        Console.WriteLine("\r\nYou have selected Chrome on Linux profile.");
+                        profile = ChangeProfileUserAgent(ChromeOnLinuxProfile);
+                        done = true;
+                        break;
+                    case 2:
+                        Console.WriteLine("\r\nYou have selected Internet explorer on iOS profile.");
+                        profile = ChangeProfileUserAgent(IeOniOsProfile);
+                        done = true;
+                        break;
+                    case 3:
+                        Console.WriteLine("\r\nYou have selected Safari on Mac profile.");
+                        profile = ChangeProfileUserAgent(SafariOnMacProfile);
+                        done = true;
+                        break;
+                    case 4:
+                        Console.WriteLine("\r\nYou have selected user default profile.");
+                        profile = CookieProfiles(DefaultProfile);
+                        done = true;
+                        break;
+                    case 5:
+                        Console.WriteLine("\r\nYou have selected selenium profile.");
+                        profile = CookieProfiles(EmptyProfile);
+                        done = true;
+                        break;
+                    default:
+                        Console.WriteLine("\r\nIncorrect value. Please enter 1,2,3,4 or 5.");
+                        input = Console.ReadKey().KeyChar.ToString();
+                        int.TryParse(input, out selectionKey);
+                        break;
+                }
+            }
+            return profile;
+        }
     }
 }
