@@ -11,6 +11,7 @@ namespace QARobot
         static void Main()
         {
 
+            // Better move this inside GetProfile() ?
             Console.WriteLine(@"Welcome. Please select profile to use for scrapper:
                               1) Chrome on Linux;
                               2) Internet explorer on iOS;
@@ -19,13 +20,16 @@ namespace QARobot
                               5) No profile;");
 
 
-            var scraper = new ActorScraper(ProfileManager.GetProfile());
+            var profile = ProfileManager.GetProfile();
+            var actorDict = EnterActors();
 
-            Console.WriteLine("\r\nHow many actors would you like to scrap?");
- 
-            scraper.ScrapeActors(EnterActors());
+            var scraper = new ActorScraper(profile);
+            scraper.ScrapeActors(actorDict);
             
-            SqlQueries.Dict = EnterActors();
+            // Why not use scraper.UniqueActors?
+            // It handles bugs like: if fullname is Millie Bobby Brown, then split[0] name:Millie, split[1] surname:Bobby
+            // but Actor.Name: Millie, Actor.Surname: Bobby Brown
+            SqlQueries.Dict = actorDict;
 
             var swatch = new Stopwatch();
             swatch.Start();
@@ -54,6 +58,8 @@ namespace QARobot
 
         private static Dictionary<string, string> EnterActors()
         {
+            Console.WriteLine("\r\nHow many actors would you like to scrape?");
+
             var readQuantity = Console.ReadKey().KeyChar.ToString();
             int quantity;
             int.TryParse(readQuantity, out quantity);
@@ -63,7 +69,7 @@ namespace QARobot
 
             for (var i = 0; i < quantity; i++)
             {
-                Console.WriteLine("\r\nPlease enter actor Name and Surname (separated with space): ");
+                Console.WriteLine($"\r\nPlease enter name of actor #{i+1}: ");
                 var actorName = Console.ReadLine();
                 try
                 {
@@ -72,7 +78,7 @@ namespace QARobot
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Sorry, couldn't find actor.");
+                    Console.WriteLine($"Sorry, couldn't find {actorName}. Please try again.");
                     i--;
                 }
             }
@@ -82,8 +88,8 @@ namespace QARobot
 
         private static KeyValuePair<string, string> ConfirmActorPrompt(string actor)
         {
-            var _client = new WebClient();
-            var suggestionJsonStr = _client.DownloadString(string.Format(ActorScraper._imdbApiTemplate, string.Join("+", actor.Split(' '))));
+            var client = new WebClient();
+            var suggestionJsonStr = client.DownloadString(string.Format(ActorScraper.imdbApiTemplate, string.Join("+", actor.Split(' '))));
             var actorsJson = JObject.Parse(suggestionJsonStr);
 
 
@@ -110,7 +116,11 @@ namespace QARobot
                             {
                                 return new KeyValuePair<string, string>(currentName, currentId);
                             }
-                            confirmedChoice = true;
+
+                            if (input.StartsWith("n"))
+                            {
+                                confirmedChoice = true;
+                            }
                         }
                     }
                 }

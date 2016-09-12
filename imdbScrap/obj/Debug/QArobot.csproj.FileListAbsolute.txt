@@ -73,3 +73,28 @@ C:\Users\WIN8\Desktop\QARobot\imdbScrap\bin\Debug\nunit.framework.xml
 C:\Users\WIN8\Desktop\QARobot\imdbScrap\bin\Debug\WebDriver.xml
 C:\Users\WIN8\Desktop\QARobot\imdbScrap\bin\Debug\WebDriver.Support.xml
 C:\Users\WIN8\Desktop\QARobot\imdbScrap\obj\Debug\QARobot.csprojResolveAssemblyReference.cache
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\QARobot.exe.config
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\obj\Debug\QARobot.exe
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\obj\Debug\QARobot.pdb
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\database.sdf
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\QARobot.exe
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\QARobot.pdb
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\EntityFramework.dll
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\nunit.framework.dll
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\WebDriver.dll
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\WebDriver.Support.dll
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\EntityFramework.xml
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\nunit.framework.xml
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\WebDriver.xml
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\WebDriver.Support.xml
+C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\obj\Debug\QARobot.csprojResolveAssemblyReference.cache

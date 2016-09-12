@@ -17,7 +17,7 @@ namespace QARobot
         private readonly string _baseUrl = "http://www.imdb.com";
         readonly NumberFormatInfo _decimalFormat = new NumberFormatInfo();
 
-        public static readonly string _imdbApiTemplate = 
+        public static readonly string imdbApiTemplate = 
             "http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q={0}";
 
         readonly string _imdbActorFilmsTemplate =
@@ -59,7 +59,7 @@ namespace QARobot
 
                 var actorNumber = actor.Value;
 
-                _driver.Navigate().GoToUrl(string.Format(_imdbApiTemplate, actorName, actorSurname));
+                _driver.Navigate().GoToUrl(string.Format(imdbApiTemplate, actorName, actorSurname));
 
                 _driver.Navigate().GoToUrl(_baseUrl + "/name/" + actorNumber);
                 string actorBirthday = "";
@@ -131,36 +131,6 @@ namespace QARobot
                 UniqueActors.Add(currentActor);
             }
         }
-
-        //private Dictionary<string, string> GetActorsNumbers(List<string> actorNames)
-        //{
-        //    var actorDict = new Dictionary<string, string>();
-        //    var _client = new WebClient();
-
-
-        //    foreach (var actor in actorNames)
-        //    {
-        //        var suggestionJsonStr = _client.DownloadString(string.Format(_imdbApiTemplate, string.Join("+", actor.Split(' '))));
-        //        var actorsJson = JObject.Parse(suggestionJsonStr);
-
-        //        try
-        //        {
-        //            var pair = confirmActorPrompt(actorsJson);
-        //            actorDict.Add(pair.Key, pair.Value);
-        //            //Console.WriteLine("\r\nSorry, no more actors found...");
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            Console.WriteLine($"\r\nSorry, couldn't find {actor} on IMDB... ");
-        //        }
-        //    }
-
-        //    return actorDict;
-        //}
-
-        
-
-        
     }
 
     public class Actor
