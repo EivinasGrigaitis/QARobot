@@ -48,8 +48,12 @@ namespace QARobot
             Console.ReadLine();
             Console.Write("Actor with biggest film rating : ");
             Database.GetFilmWithBiggestRating();
-            Console.WriteLine("Universal Query result (actors movies) :");
-            Database.ActorsAndMovies(SqlQueries.UniversalString());
+            Console.WriteLine("Co-Stars :");
+            Database.ActorsAndMovies(SqlQueries.UniversalString(SqlQueries.Dict));
+
+            Console.WriteLine("Choose actors (Co-stars) :");
+            Database.ActorsAndMovies(SqlQueries.CoStarMethod());
+
             Database.CloseConnections();
             Console.ReadLine();
         }
@@ -125,7 +129,7 @@ namespace QARobot
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 Console.WriteLine($"\r\nSorry, couldn't find {actor} on IMDB... Try another one!");
             }
