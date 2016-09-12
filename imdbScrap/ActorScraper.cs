@@ -17,10 +17,10 @@ namespace QARobot
         private readonly string _baseUrl = "http://www.imdb.com";
         readonly NumberFormatInfo _decimalFormat = new NumberFormatInfo();
 
-        static readonly string _imdbApiTemplate = 
+        public static readonly string _imdbApiTemplate = 
             "http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q={0}";
 
-        private readonly string _imdbActorFilmsTemplate =
+        readonly string _imdbActorFilmsTemplate =
             "http://www.imdb.com/filmosearch?explore=title_type&role={0}&title_type=movie";
 
         public HashSet<Actor> UniqueActors = new HashSet<Actor>();
@@ -158,77 +158,9 @@ namespace QARobot
         //    return actorDict;
         //}
 
-        public static KeyValuePair<string, string> confirmActorPrompt(string actor)
-        {
-            var _client = new WebClient();
-            var suggestionJsonStr = _client.DownloadString(string.Format(_imdbApiTemplate, string.Join("+", actor.Split(' '))));
-            var actorsJson = JObject.Parse(suggestionJsonStr);
+        
 
-
-            if (actorsJson.Count == 0)
-            {
-                throw new Exception("No actors found.");
-            }
-            try
-            {
-                foreach (var actorCategory in actorsJson.Children())
-                {
-                    foreach (var entry in actorCategory.Children())
-                    {
-                        var currentName = entry.First["name"].Value<string>();
-                        var currentContext = entry.First["description"].Value<string>();
-                        var currentId = entry.First["id"].Value<string>();
-
-                        bool confirmedChoice = false;
-                        while (!confirmedChoice)
-                        {
-                            Console.Write($"\r\nDid you mean: {currentName} ({currentContext})? y/n: ");
-                            var input = Console.ReadLine();
-                            if (input.StartsWith("y"))
-                            {
-                                return new KeyValuePair<string, string>(currentName, currentId);
-                            }
-                            confirmedChoice = true;
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"\r\nSorry, couldn't find {actor} on IMDB... ");
-            }
-
-
-            throw new Exception("Actor not found.");
-        }
-
-        public static Dictionary<string,string> EnterActors()
-        {
-            var readQuantity = Console.ReadKey().KeyChar.ToString();
-            int quantity;
-            int.TryParse(readQuantity, out quantity);
-
-            var actorDict = new Dictionary<string, string>();
-
-
-            for (var i = 0; i < quantity; i++)
-            {
-                Console.WriteLine("\r\nPlease enter actor Name and Surname (Separated with space): ");
-                var actorName = Console.ReadLine();
-                try
-                {
-                    var nameNumPair = ActorScraper.confirmActorPrompt(actorName);
-                    actorDict.Add(nameNumPair.Key, nameNumPair.Value);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Sorry, couldn't find actor.");
-                    i--;
-                }
-            }
-          
-            return actorDict;
-        }
+        
     }
 
     public class Actor

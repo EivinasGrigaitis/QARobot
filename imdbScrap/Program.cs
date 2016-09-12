@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Data.SqlServerCe;
 using System.Diagnostics;
-using OpenQA.Selenium.Firefox;
+using System.Net;
+using Newtonsoft.Json.Linq;
 
 namespace QARobot
 {
@@ -23,9 +23,9 @@ namespace QARobot
 
             Console.WriteLine("\r\nHow many actors would you like to scrap?");
  
-            scraper.ScrapeActors(ActorScraper.EnterActors());
+            scraper.ScrapeActors(EnterActors());
             
-            SqlQueries.Dict = ActorScraper.EnterActors();
+            SqlQueries.Dict = EnterActors();
 
             var swatch = new Stopwatch();
             swatch.Start();
@@ -48,6 +48,79 @@ namespace QARobot
             Database.ActorsAndMovies(SqlQueries.UniversalString());
             Database.CloseConnections();
             Console.ReadLine();
+        }
+
+
+
+        private static Dictionary<string, string> EnterActors()
+        {
+            var readQuantity = Console.ReadKey().KeyChar.ToString();
+            int quantity;
+            int.TryParse(readQuantity, out quantity);
+
+            var actorDict = new Dictionary<string, string>();
+
+
+            for (var i = 0; i < quantity; i++)
+            {
+                Console.WriteLine("\r\nPlease enter actor Name and Surname (separated with space): ");
+                var actorName = Console.ReadLine();
+                try
+                {
+                    var nameNumPair = ConfirmActorPrompt(actorName);
+                    actorDict.Add(nameNumPair.Key, nameNumPair.Value);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Sorry, couldn't find actor.");
+                    i--;
+                }
+            }
+
+            return actorDict;
+        }
+
+        private static KeyValuePair<string, string> ConfirmActorPrompt(string actor)
+        {
+            var _client = new WebClient();
+            var suggestionJsonStr = _client.DownloadString(string.Format(ActorScraper._imdbApiTemplate, string.Join("+", actor.Split(' '))));
+            var actorsJson = JObject.Parse(suggestionJsonStr);
+
+
+            if (actorsJson.Count == 0)
+            {
+                throw new Exception("No actors found.");
+            }
+            try
+            {
+                foreach (var actorCategory in actorsJson.Children())
+                {
+                    foreach (var entry in actorCategory.Children())
+                    {
+                        var currentName = entry.First["name"].Value<string>();
+                        var currentContext = entry.First["description"].Value<string>();
+                        var currentId = entry.First["id"].Value<string>();
+
+                        bool confirmedChoice = false;
+                        while (!confirmedChoice)
+                        {
+                            Console.Write($"\r\nDid you mean: {currentName} ({currentContext})? y/n: ");
+                            var input = Console.ReadLine();
+                            if (input.StartsWith("y"))
+                            {
+                                return new KeyValuePair<string, string>(currentName, currentId);
+                            }
+                            confirmedChoice = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"\r\nSorry, couldn't find {actor} on IMDB... Try another one!");
+            }
+
+            throw new Exception("Actor not found.");
         }
     }
 }
