@@ -47,6 +47,10 @@ namespace QARobot
             return UniqueFilms.ToList();
         }
 
+        /// <summary>
+        /// Fills the ActorScraper object with info by using a dict of actorName, actorImbdNumber strings.
+        /// </summary>
+        /// <param name="actorDict"></param>
         public void ScrapeActors(Dictionary<string, string> actorDict)
         {
             foreach (var actor in actorDict)
@@ -57,10 +61,8 @@ namespace QARobot
 
                 var actorNumber = actor.Value;
 
-                _driver.Navigate().GoToUrl(string.Format(imdbApiTemplate, actorName, actorSurname));
-
                 _driver.Navigate().GoToUrl(_baseUrl + "/name/" + actorNumber);
-                string actorBirthday = "";
+                string actorBirthday = string.Empty;
                 try
                 {
                     actorBirthday =
@@ -72,7 +74,7 @@ namespace QARobot
 
                 var currentActor = new Actor(actorName, actorSurname, actorBirthday);
 
-                // Scrape films
+                // Scrape films from page
                 while (true)
                 {
                     foreach (var filmElem in _driver.FindElements(By.XPath("//*[contains(@class,\'lister-item-content\')]")))
@@ -89,7 +91,7 @@ namespace QARobot
                         }
                         catch (NoSuchElementException) { }
 
-                        string filmYear = null;
+                        string filmYear = string.Empty;
                         try
                         {
                             var text =
@@ -99,7 +101,7 @@ namespace QARobot
                         }
                         catch (NoSuchElementException) { }
 
-                        string filmGenre = "";
+                        string filmGenre = string.Empty;
                         try
                         {
                             filmGenre =
@@ -128,6 +130,7 @@ namespace QARobot
 
                 UniqueActors.Add(currentActor);
             }
+            _driver.Quit();
         }
     }
 
@@ -145,6 +148,8 @@ namespace QARobot
             Born = birthday;
             Films = new HashSet<Film>();
         }
+
+        public string Fullname => Name + " " + Surname;
 
         public override string ToString()
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using Newtonsoft.Json.Linq;
 
@@ -26,11 +27,7 @@ namespace QARobot
             var scraper = new ActorScraper(profile);
             scraper.ScrapeActors(actorDict);
             
-            // Why not use scraper.UniqueActors?
-            // It handles bugs like: if fullname is Millie Bobby Brown, then split[0] name:Millie, split[1] surname:Bobby
-            // but Actor.Name: Millie, Actor.Surname: Bobby Brown
-            SqlQueries.Dict = actorDict;
-
+            SqlQueries.actorObjList = scraper.UniqueActors.ToList();
             var swatch = new Stopwatch();
             swatch.Start();
 
@@ -49,7 +46,7 @@ namespace QARobot
             Console.Write("Actor with biggest film rating : ");
             Database.GetFilmWithBiggestRating();
             Console.WriteLine("Co-Stars :");
-            Database.ActorsAndMovies(SqlQueries.UniversalString(SqlQueries.Dict));
+            Database.ActorsAndMovies(SqlQueries.UniversalString());
 
             Console.WriteLine("Choose actors (Co-stars) :");
             Database.ActorsAndMovies(SqlQueries.CoStarMethod());
@@ -62,11 +59,14 @@ namespace QARobot
 
         private static Dictionary<string, string> EnterActors()
         {
-            Console.WriteLine("\r\nHow many actors would you like to scrape?");
-
-            var readQuantity = Console.ReadKey().KeyChar.ToString();
+            var readQuantity = "";
+            while (!SqlQueries.isStringIntRange(readQuantity, 1, 10))
+            {
+                Console.WriteLine("\r\nHow many actors would you like to scrape? (Up to 10)");
+                readQuantity = Console.ReadLine();
+            }
             int quantity;
-            int.TryParse(readQuantity, out quantity);
+            quantity = Int32.Parse(readQuantity);
 
             var actorDict = new Dictionary<string, string>();
 
@@ -116,12 +116,12 @@ namespace QARobot
                         {
                             Console.Write($"\r\nDid you mean: {currentName} ({currentContext})? y/n: ");
                             var input = Console.ReadLine();
-                            if (input.StartsWith("y"))
+                            if (input.ToLower() == "y")
                             {
                                 return new KeyValuePair<string, string>(currentName, currentId);
                             }
 
-                            if (input.StartsWith("n"))
+                            if (input.ToLower() == "n")
                             {
                                 confirmedChoice = true;
                             }

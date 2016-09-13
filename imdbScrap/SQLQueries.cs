@@ -9,7 +9,7 @@ namespace QARobot
     class SqlQueries
     {
         public static Dictionary<string, string> ChoosenActorsDictionary = new Dictionary<string, string>();
-        public static Dictionary<string, string> Dict = new Dictionary<string, string>();
+        public static List<Actor> actorObjList = new List<Actor>();
         public static List<string> ActorsList;
         public static string DbConnection = @"
                     Data Source = database.sdf";
@@ -56,22 +56,23 @@ namespace QARobot
                    "AND [surname]='" + surname + "'";
         }
 
-        public static string UniversalString(Dictionary<string, string> dict)
+        public static string UniversalString(List<Actor> actorList = null)
         {
+            if (actorList == null) actorList = actorObjList;
             var cmd = new SqlCommand();
             var sqlBuilder = new StringBuilder();
             sqlBuilder.Append("SELECT  f.name, f.year, f.rating  " +
                               "FROM FilmaiToActor AS fa " +
                               "INNER JOIN Film AS f ON fa.filmId = f.filmId " +
                               "INNER JOIN actor AS a ON fa.ActorId=a.actorId ");
-            if (dict.Keys.Count > 1)
+            if (actorList.Count > 1)
             {
                 var i = 1;
-                foreach (var item in dict.Keys)
+                foreach (var item in actorList)
                 {
                     sqlBuilder.Append(i == 1 ? " WHERE " : " OR ");
-                    var paramName = item.Split(' ')[0];
-                    var paramSurname = item.Split(' ')[1];
+                    var paramName = item.Name;
+                    var paramSurname = item.Surname;
                     sqlBuilder.AppendFormat("(a.Name ='{0}' AND a.Surname = '{1}' )", paramName, paramSurname);
                     cmd.Parameters.AddWithValue(paramName, "%" + item + "%");
                     cmd.Parameters.AddWithValue(paramSurname, "%" + item + "%");
@@ -80,47 +81,62 @@ namespace QARobot
             }
 
             return cmd.CommandText = sqlBuilder + "GROUP BY  f.name,f.year, f.rating " +
-                                     "HAVING COUNT(*) >=" + dict.Keys.Count;
+                                     "HAVING COUNT(*) >=" + actorList.Count;
         }
 
         public static string CoStarMethod()
         {
-            ActorsList = Dict.Keys.ToList();
+            ActorsList = actorObjList.Select(a => a.Name + " " + a.Surname).ToList();
+            
             Console.WriteLine("Choose Co-star actors :");
-            foreach (var actor in ActorsList)
+            for (int i = 0; i < actorObjList.Count; i++)
             {
-                int index = ActorsList.IndexOf(actor);
-                Console.WriteLine("Actor - " + actor + " Actor Index - " + index);
+                Console.WriteLine("Actor - " + actorObjList[i].Fullname + " Actor Index - " + i);
             }
-            Console.WriteLine("\r\n How many actors you would like to Co-Star?");
 
-            var readQuantity = Console.ReadKey().KeyChar.ToString();
-            int quantity;
-            int.TryParse(readQuantity, out quantity);
+            var chosenActors = new List<Actor>();
+            int quantity = -1;
+            while (!(quantity > 0 && quantity <= actorObjList.Count))
+            {
+                Console.WriteLine($"\r\n How many actors you would like to Co-Star? (No more than {actorObjList.Count})");
+                var readQuantity = Console.ReadKey().KeyChar.ToString();
+                int.TryParse(readQuantity, out quantity);
+            }
+                
             for (var i = 0; i < quantity; i++)
             {
                 Console.WriteLine($"\r\nPlease enter index of actor #{i + 1}: ");
-                var actor = Console.ReadLine();
                 try
                 {
-                    if (ActorsList.Contains(ActorsList[Convert.ToInt32(actor)]))
-                    {
-                        ChoosenActorsDictionary.Add(ActorsList[Convert.ToInt32(actor)], quantity.ToString());
-                    }
-
-
-
+                    var actorIndex = Convert.ToInt32(Console.ReadLine());
+                    chosenActors.Add(actorObjList[actorIndex]);
                 }
                 catch (Exception)
                 {
                     i--;
                 }
             }
-            return UniversalString(ChoosenActorsDictionary);
+            return UniversalString(chosenActors);
         }
 
-
-
-
+        /// <summary>
+        /// Inclusive int.parse(string) check in boundary [lower, upper]
+        /// </summary>
+        /// <returns>True if in boundary, false if not (or if incorrect string supplied)</returns>
+        static public bool isStringIntRange(string intString, int lower, int upper)
+        {
+            try
+            {
+                var integer = Int32.Parse(intString);
+                if (integer >= lower && integer <= upper) return true;
+                return false;
+            }
+            catch (Exception e)
+            {
+                //Debug
+                Console.WriteLine($"Could not convert string to integer: {e}");
+                return false;
+            }
+        }
     }
 }
