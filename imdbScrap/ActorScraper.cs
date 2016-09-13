@@ -53,6 +53,8 @@ namespace QARobot
         /// <param name="actorDict"></param>
         public void ScrapeActors(Dictionary<string, string> actorDict)
         {
+            Console.WriteLine("\r\nStarting IMDB scraping...");
+
             foreach (var actor in actorDict)
             {
                 var actorFullname = actor.Key;
@@ -131,6 +133,7 @@ namespace QARobot
                 UniqueActors.Add(currentActor);
             }
             _driver.Quit();
+            Console.WriteLine("Scraping complete.");
         }
     }
 

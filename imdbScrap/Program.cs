@@ -11,45 +11,30 @@ namespace QARobot
     {
         static void Main()
         {
-
-            // Better move this inside GetProfile() ?
-            Console.WriteLine(@"Welcome. Please select profile to use for scrapper:
-                              1) Chrome on Linux;
-                              2) Internet explorer on iOS;
-                              3) Safari on Mac;
-                              4) User default;
-                              5) No profile;");
-
-
             var profile = ProfileManager.GetProfile();
             var actorDict = EnterActors();
 
             var scraper = new ActorScraper(profile);
+            
             scraper.ScrapeActors(actorDict);
             
-            SqlQueries.actorObjList = scraper.UniqueActors.ToList();
-            var swatch = new Stopwatch();
-            swatch.Start();
-
-            Console.WriteLine("Data transfer to database");
+            SqlQueries.ActorObjList = scraper.UniqueActors.ToList();
 
             Database.FillDatabaseInfo(scraper);
-
-            swatch.Stop();
-            Console.WriteLine(swatch.Elapsed);
-            Console.WriteLine("Completed :)");
-            Console.WriteLine("Press any key to start query");
-            Console.ReadLine();
-            Console.Write("Actor with most films : ");
+            Console.WriteLine("Data transfer complete.");
+            Console.Write("\r\nActor with most films: ");
             Database.GetActorWithMostFilms();
-            Console.ReadLine();
-            Console.Write("Actor with biggest film rating : ");
+            Console.Write("\r\nActor with biggest film rating: ");
             Database.GetFilmWithBiggestRating();
-            Console.WriteLine("Co-Stars :");
-            Database.ActorsAndMovies(SqlQueries.UniversalString());
 
-            Console.WriteLine("Choose actors (Co-stars) :");
-            Database.ActorsAndMovies(SqlQueries.CoStarMethod());
+            if (SqlQueries.ActorObjList.Count >= 2)
+            {
+                Console.WriteLine($"\r\nThe {SqlQueries.ActorObjList.Count} actors are Co-Stars in all these films:");
+                Database.ActorsAndMovies(SqlQueries.UniversalString());
+
+                Console.WriteLine("\r\nChoose actors (Co-stars) :");
+                Database.ActorsAndMovies(SqlQueries.CoStarMethod());
+            }
 
             Database.CloseConnections();
             Console.ReadLine();
@@ -60,13 +45,12 @@ namespace QARobot
         private static Dictionary<string, string> EnterActors()
         {
             var readQuantity = "";
-            while (!SqlQueries.isStringIntRange(readQuantity, 1, 10))
+            while (!SqlQueries.IsStringIntRange(readQuantity, 1, 10))
             {
                 Console.WriteLine("\r\nHow many actors would you like to scrape? (Up to 10)");
                 readQuantity = Console.ReadLine();
             }
-            int quantity;
-            quantity = Int32.Parse(readQuantity);
+            var quantity = int.Parse(readQuantity);
 
             var actorDict = new Dictionary<string, string>();
 

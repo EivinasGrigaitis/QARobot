@@ -217,6 +217,8 @@ namespace QARobot
 
         public static void FillDatabaseInfo(ActorScraper scraper)
         {
+            Console.WriteLine("\r\nTransfering to database...");
+
             foreach (var actor in scraper.UniqueActors)
             {
                 AddActorToDb(actor.Name, actor.Surname, actor.Born);

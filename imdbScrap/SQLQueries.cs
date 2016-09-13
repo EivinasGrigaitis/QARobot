@@ -9,7 +9,7 @@ namespace QARobot
     class SqlQueries
     {
         public static Dictionary<string, string> ChoosenActorsDictionary = new Dictionary<string, string>();
-        public static List<Actor> actorObjList = new List<Actor>();
+        public static List<Actor> ActorObjList = new List<Actor>();
         public static List<string> ActorsList;
         public static string DbConnection = @"
                     Data Source = database.sdf";
@@ -58,7 +58,7 @@ namespace QARobot
 
         public static string UniversalString(List<Actor> actorList = null)
         {
-            if (actorList == null) actorList = actorObjList;
+            if (actorList == null) actorList = ActorObjList;
             var cmd = new SqlCommand();
             var sqlBuilder = new StringBuilder();
             sqlBuilder.Append("SELECT  f.name, f.year, f.rating  " +
@@ -86,35 +86,36 @@ namespace QARobot
 
         public static string CoStarMethod()
         {
-            ActorsList = actorObjList.Select(a => a.Name + " " + a.Surname).ToList();
+            ActorsList = ActorObjList.Select(a => a.Name + " " + a.Surname).ToList();
             
             Console.WriteLine("Choose Co-star actors :");
-            for (int i = 0; i < actorObjList.Count; i++)
+            for (var i = 0; i < ActorObjList.Count; i++)
             {
-                Console.WriteLine("Actor - " + actorObjList[i].Fullname + " Actor Index - " + i);
+                Console.WriteLine("Actor - " + ActorObjList[i].Fullname + " Actor Index - " + i);
             }
 
+            string readQuantity = "";
             var chosenActors = new List<Actor>();
-            int quantity = -1;
-            while (!(quantity > 0 && quantity <= actorObjList.Count))
+            int quantity;
+            while (!IsStringIntRange(readQuantity, 2, ActorObjList.Count))
             {
-                Console.WriteLine($"\r\n How many actors you would like to Co-Star? (No more than {actorObjList.Count})");
-                var readQuantity = Console.ReadKey().KeyChar.ToString();
-                int.TryParse(readQuantity, out quantity);
+                Console.WriteLine($"\r\n How many actors you would like to Co-Star? (No less than 2, no more than {ActorObjList.Count})");
+                readQuantity = Console.ReadKey().KeyChar.ToString();
             }
-                
+
+            int.TryParse(readQuantity, out quantity);
+
             for (var i = 0; i < quantity; i++)
             {
-                Console.WriteLine($"\r\nPlease enter index of actor #{i + 1}: ");
-                try
+                var actorIndex = "";
+
+                while (!IsStringIntRange(actorIndex, 0, ActorObjList.Count - 1))
                 {
-                    var actorIndex = Convert.ToInt32(Console.ReadLine());
-                    chosenActors.Add(actorObjList[actorIndex]);
+                    Console.WriteLine($"\r\nPlease enter index of actor #{i + 1}: ");
+                    actorIndex = Console.ReadLine();
                 }
-                catch (Exception)
-                {
-                    i--;
-                }
+
+                chosenActors.Add(ActorObjList[int.Parse(actorIndex)]);
             }
             return UniversalString(chosenActors);
         }
@@ -123,18 +124,16 @@ namespace QARobot
         /// Inclusive int.parse(string) check in boundary [lower, upper]
         /// </summary>
         /// <returns>True if in boundary, false if not (or if incorrect string supplied)</returns>
-        static public bool isStringIntRange(string intString, int lower, int upper)
+        public static bool IsStringIntRange(string intString, int lower, int upper)
         {
             try
             {
-                var integer = Int32.Parse(intString);
+                var integer = int.Parse(intString);
                 if (integer >= lower && integer <= upper) return true;
                 return false;
             }
             catch (Exception e)
             {
-                //Debug
-                Console.WriteLine($"Could not convert string to integer: {e}");
                 return false;
             }
         }

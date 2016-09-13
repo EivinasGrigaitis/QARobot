@@ -39,6 +39,13 @@ namespace QARobot
 
         public static FirefoxProfile GetProfile()
         {
+            Console.WriteLine(@"Welcome. Please select profile to use for scrapper:
+                              1) Chrome on Linux;
+                              2) Internet explorer on iOS;
+                              3) Safari on Mac;
+                              4) User default;
+                              5) No profile;");
+
             var input = Console.ReadKey().KeyChar.ToString();
             int selectionKey;
             int.TryParse(input, out selectionKey);
