@@ -99,7 +99,7 @@ namespace QARobot
                         }
                         catch (NoSuchElementException) { }
 
-                        string filmGenre = null;
+                        string filmGenre = "";
                         try
                         {
                             filmGenre =

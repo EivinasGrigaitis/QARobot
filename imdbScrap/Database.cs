@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Data.SqlServerCe;
 
 namespace QARobot
@@ -39,7 +38,7 @@ namespace QARobot
             catch (Exception)
             {
                 CloseConnections();
-                Console.WriteLine("Count not insert." + name + ", " + surname + ", " + born);
+                Console.WriteLine("Count not insert. " + name + ", " + surname + ", " + born);
             }
         }
 
@@ -57,7 +56,7 @@ namespace QARobot
             catch (Exception)
             {
                 CloseConnections();
-                Console.WriteLine("Count not insert." + name + ", " + rating + "," + genre + "," + year);
+                Console.WriteLine("Count not insert. " + name + ", " + rating + "," + genre + "," + year);
             }
         }
 
@@ -231,10 +230,10 @@ namespace QARobot
             Console.WriteLine("Actors and films query");
             foreach (var actor in scraper.UniqueActors)
             {
-                int actorId = SelectActorId(actor.Name, actor.Surname);
+                var actorId = SelectActorId(actor.Name, actor.Surname);
                 foreach (var film in actor.Films)
                 {
-                    int movieId = SelectFilmId(film.Name);
+                    var movieId = SelectFilmId(film.Name);
                     SelectActorFilmId(actorId, movieId);
                 }
             }
