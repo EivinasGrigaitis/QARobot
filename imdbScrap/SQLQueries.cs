@@ -8,7 +8,7 @@ namespace QARobot
 {
     class SqlQueries
     {
-        public static Dictionary<string, string> choosenActorsDictionary = new Dictionary<string, string>();
+        public static Dictionary<string, string> ChoosenActorsDictionary = new Dictionary<string, string>();
         public static Dictionary<string, string> Dict = new Dictionary<string, string>();
         public static List<string> ActorsList;
         public static string DbConnection = @"
@@ -64,7 +64,7 @@ namespace QARobot
                               "FROM FilmaiToActor AS fa " +
                               "INNER JOIN Film AS f ON fa.filmId = f.filmId " +
                               "INNER JOIN actor AS a ON fa.ActorId=a.actorId ");
-            if (dict.Keys.Count >1)
+            if (dict.Keys.Count > 1)
             {
                 var i = 1;
                 foreach (var item in dict.Keys)
@@ -80,19 +80,19 @@ namespace QARobot
             }
 
             return cmd.CommandText = sqlBuilder + "GROUP BY  f.name,f.year, f.rating " +
-                                     "HAVING COUNT(*) >1";
+                                     "HAVING COUNT(*) >=" + dict.Keys.Count;
         }
 
         public static string CoStarMethod()
         {
             ActorsList = Dict.Keys.ToList();
-            Console.WriteLine("NONSENSE TEST");
+            Console.WriteLine("Choose Co-star actors :");
             foreach (var actor in ActorsList)
             {
                 int index = ActorsList.IndexOf(actor);
                 Console.WriteLine("Actor - " + actor + " Actor Index - " + index);
             }
-            Console.WriteLine("\r\nHow many actors would you like to scrape?");
+            Console.WriteLine("\r\n How many actors you would like to Co-Star?");
 
             var readQuantity = Console.ReadKey().KeyChar.ToString();
             int quantity;
@@ -105,7 +105,7 @@ namespace QARobot
                 {
                     if (ActorsList.Contains(ActorsList[Convert.ToInt32(actor)]))
                     {
-                        choosenActorsDictionary.Add(ActorsList[Convert.ToInt32(actor)], quantity.ToString());
+                        ChoosenActorsDictionary.Add(ActorsList[Convert.ToInt32(actor)], quantity.ToString());
                     }
 
 
@@ -113,11 +113,10 @@ namespace QARobot
                 }
                 catch (Exception)
                 {
-
                     i--;
                 }
             }
-            return UniversalString(choosenActorsDictionary);
+            return UniversalString(ChoosenActorsDictionary);
         }
 
 
