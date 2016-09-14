@@ -53,7 +53,7 @@ namespace QARobot
                 SELECT [actorID] 
                 FROM [actor]
                 WHERE [name]='" + name + "' " +
-                   "AND [surname]='" + surname + "'";
+                "AND [surname]='" + surname + "'";
         }
 
         public static string UniversalString(List<Actor> actorList = null)
@@ -86,8 +86,6 @@ namespace QARobot
 
         public static string CoStarMethod()
         {
-            ActorsList = ActorObjList.Select(a => a.Name + " " + a.Surname).ToList();
-            
             Console.WriteLine("Choose Co-star actors :");
             for (var i = 0; i < ActorObjList.Count; i++)
             {

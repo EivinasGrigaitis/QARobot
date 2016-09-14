@@ -27,13 +27,15 @@ namespace QARobot
             Console.Write("\r\nActor with biggest film rating: ");
             Database.GetFilmWithBiggestRating();
 
-            if (SqlQueries.ActorObjList.Count >= 2)
+            if (SqlQueries.ActorObjList.Count > 1)
             {
-                Console.WriteLine($"\r\nThe {SqlQueries.ActorObjList.Count} actors are Co-Stars in all these films:");
+                Console.WriteLine($"\r\nThe {SqlQueries.ActorObjList.Count} actors Co-Star in all these films:");
                 Database.ActorsAndMovies(SqlQueries.UniversalString());
 
-                Console.WriteLine("\r\nChoose actors (Co-stars) :");
-                Database.ActorsAndMovies(SqlQueries.CoStarMethod());
+                if (SqlQueries.ActorObjList.Count > 2)
+                {
+                    Database.ActorsAndMovies(SqlQueries.CoStarMethod());
+                }
             }
 
             Database.CloseConnections();
@@ -54,23 +56,22 @@ namespace QARobot
 
             var actorDict = new Dictionary<string, string>();
 
-
-            for (var i = 0; i < quantity; i++)
+            var i = 0;
+            while (i < quantity)
             {
-                Console.WriteLine($"\r\nPlease enter name of actor #{i+1}: ");
+                Console.WriteLine($"\r\nPlease enter name of actor #{i + 1}: ");
                 var actorName = Console.ReadLine();
                 try
                 {
                     var nameNumPair = ConfirmActorPrompt(actorName);
                     actorDict.Add(nameNumPair.Key, nameNumPair.Value);
+                    i++;
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine($"Sorry, couldn't find {actorName}. Please try again.");
-                    i--;
+                    Console.WriteLine($"Sorry, couldn't find `{actorName}`. Please try again.");
                 }
             }
-
             return actorDict;
         }
 
@@ -78,6 +79,7 @@ namespace QARobot
         {
             var client = new WebClient();
             var suggestionJsonStr = client.DownloadString(string.Format(ActorScraper.imdbApiTemplate, string.Join("+", actor.Split(' '))));
+
             var actorsJson = JObject.Parse(suggestionJsonStr);
 
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 
 
 namespace QARobot
@@ -13,7 +14,9 @@ namespace QARobot
     {
         private readonly IWebDriver _driver;
         private readonly string _baseUrl = "http://www.imdb.com";
+
         readonly NumberFormatInfo _decimalFormat = new NumberFormatInfo();
+        private WebDriverWait _wait;
 
         public static readonly string imdbApiTemplate = 
             "http://www.imdb.com/xml/find?json=1&nr=1&nm=on&q={0}";
@@ -27,14 +30,11 @@ namespace QARobot
         public ActorScraper(FirefoxProfile profile)
         {
             _driver = new FirefoxDriver(profile);
+
             _driver.Manage().Window.Maximize();
-
             _decimalFormat.NumberDecimalSeparator = ".";
-        }
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
 
-         ~ActorScraper()
-        {
-            _driver.Quit();
         }
 
         public List<Actor> GetScrapedActors()
@@ -119,8 +119,10 @@ namespace QARobot
 
                     try
                     {
+                        var nextBtn = _driver.FindElement(By.ClassName("next-page"));
                         _driver.FindElement(By.ClassName("next-page")).Click();
-                        System.Threading.Thread.Sleep(1500);
+                        var newUrl = _wait.Until(ExpectedConditions.StalenessOf(nextBtn));
+                        //System.Threading.Thread.Sleep(1500);
                     }
                     catch (NoSuchElementException)
                     {
