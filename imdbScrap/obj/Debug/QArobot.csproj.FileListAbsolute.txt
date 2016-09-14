@@ -98,3 +98,5 @@ C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\nunit.framework.xml
 C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\WebDriver.xml
 C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\bin\Debug\WebDriver.Support.xml
 C:\Users\Edvard\Dropbox\Adform\QA Robot\imdbScrap\obj\Debug\QARobot.csprojResolveAssemblyReference.cache
+C:\Users\WIN8\Desktop\QARobot\imdbScrap\bin\Debug\Colorful.Console.dll
+C:\Users\WIN8\Desktop\QARobot\imdbScrap\bin\Debug\Colorful.Console.xml

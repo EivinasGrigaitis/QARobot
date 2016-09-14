@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlServerCe;
+using Console = Colorful.Console;
 
 namespace QARobot
 {
@@ -38,7 +39,7 @@ namespace QARobot
             catch (Exception)
             {
                 CloseConnections();
-                Console.WriteLine("Count not insert. " + name + ", " + surname + ", " + born);
+                Console.WriteLine("Count not insert. " + name + ", " + surname + ", " + born, ProfileManager.ErrorColor);
             }
         }
 
@@ -56,7 +57,7 @@ namespace QARobot
             catch (Exception)
             {
                 CloseConnections();
-                Console.WriteLine("Count not insert. " + name + ", " + rating + "," + genre + "," + year);
+                Console.WriteLine("Count not insert. " + name + ", " + rating + "," + genre + "," + year, ProfileManager.ErrorColor);
             }
         }
 
@@ -85,7 +86,7 @@ namespace QARobot
             catch (Exception)
             {
                 CloseConnections();
-                Console.WriteLine("Could not select " + name + " " + surname);
+                Console.WriteLine("Could not select " + name + " " + surname, ProfileManager.ErrorColor);
             }
             return value;
         }
@@ -110,7 +111,7 @@ namespace QARobot
             catch (Exception)
             {
                 CloseConnections();
-                Console.WriteLine("Could not select " + name);
+                Console.WriteLine("Could not select " + name, ProfileManager.ErrorColor);
             }
             return value;
         }
@@ -127,7 +128,7 @@ namespace QARobot
             catch (Exception)
             {
                 CloseConnections();
-                Console.WriteLine("Count not insert " + actorId + ", " + filmId);
+                Console.WriteLine("Count not insert " + actorId + ", " + filmId, ProfileManager.ErrorColor);
             }
         }
 
@@ -155,7 +156,7 @@ namespace QARobot
             catch (Exception)
             {
                 CloseConnections();
-                Console.WriteLine("Could not select actor with most films");
+                Console.WriteLine("Could not select actor with most films", ProfileManager.ErrorColor);
             }
         }
 
@@ -183,7 +184,7 @@ namespace QARobot
             catch (Exception)
             {
                 CloseConnections();
-                Console.WriteLine("Could not select actor with most films");
+                Console.WriteLine("Could not select actor with most films", ProfileManager.ErrorColor);
             }
         }
 
@@ -211,13 +212,13 @@ namespace QARobot
             catch (Exception)
             {
                 CloseConnections();
-                Console.WriteLine("Could not select actors");
+                Console.WriteLine("Could not select actors", ProfileManager.ErrorColor);
             }
         }
 
         public static void FillDatabaseInfo(ActorScraper scraper)
         {
-            Console.WriteLine("\r\nTransfering to database...");
+            Console.WriteLine("\r\nTransfering to database...", ProfileManager.InfoColor);
 
             foreach (var actor in scraper.UniqueActors)
             {
@@ -229,7 +230,7 @@ namespace QARobot
                 AddMovieToDb(movie.Name, movie.Rating, movie.Genre, movie.Year);
             }
 
-            Console.WriteLine("Actors and films query");
+            Console.WriteLine("Starting actors and films query...", ProfileManager.InfoColor);
             foreach (var actor in scraper.UniqueActors)
             {
                 var actorId = SelectActorId(actor.Name, actor.Surname);

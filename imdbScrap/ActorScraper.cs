@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
-
+using Console = Colorful.Console;
 
 namespace QARobot
 {
@@ -53,7 +53,7 @@ namespace QARobot
         /// <param name="actorDict"></param>
         public void ScrapeActors(Dictionary<string, string> actorDict)
         {
-            Console.WriteLine("\r\nStarting IMDB scraping...");
+            Console.WriteLine("\r\nStarting IMDB scraping...", ProfileManager.InfoColor);
 
             foreach (var actor in actorDict)
             {
@@ -120,9 +120,8 @@ namespace QARobot
                     try
                     {
                         var nextBtn = _driver.FindElement(By.ClassName("next-page"));
-                        _driver.FindElement(By.ClassName("next-page")).Click();
-                        var newUrl = _wait.Until(ExpectedConditions.StalenessOf(nextBtn));
-                        //System.Threading.Thread.Sleep(1500);
+                        nextBtn.Click();
+                        _wait.Until(ExpectedConditions.StalenessOf(nextBtn));
                     }
                     catch (NoSuchElementException)
                     {
@@ -135,7 +134,7 @@ namespace QARobot
                 UniqueActors.Add(currentActor);
             }
             _driver.Quit();
-            Console.WriteLine("Scraping complete.");
+            Console.WriteLine("Scraping complete.", ProfileManager.SuccessColor);
         }
     }
 

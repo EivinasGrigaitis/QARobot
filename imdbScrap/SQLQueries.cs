@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
+using Console = Colorful.Console;
 using System.Text;
 
 namespace QARobot
@@ -80,16 +80,17 @@ namespace QARobot
                 }
             }
 
-            return cmd.CommandText = sqlBuilder + "GROUP BY  f.name,f.year, f.rating " +
+            return cmd.CommandText = sqlBuilder + "GROUP BY  f.name, f.year, f.rating " +
                                      "HAVING COUNT(*) >=" + actorList.Count;
         }
 
         public static string CoStarMethod()
         {
-            Console.WriteLine("Choose Co-star actors :");
+            //Bug: fix selecting same actors
+            Console.WriteLine("\r\nChoose Co-star actors :", ProfileManager.ResultColor);
             for (var i = 0; i < ActorObjList.Count; i++)
             {
-                Console.WriteLine("Actor - " + ActorObjList[i].Fullname + " Actor Index - " + i);
+                Console.WriteLine(i + ". "+ ActorObjList[i].Fullname, ProfileManager.InfoColor);
             }
 
             string readQuantity = "";
@@ -97,7 +98,7 @@ namespace QARobot
             int quantity;
             while (!IsStringIntRange(readQuantity, 2, ActorObjList.Count))
             {
-                Console.WriteLine($"\r\n How many actors you would like to Co-Star? (No less than 2, no more than {ActorObjList.Count})");
+                Console.WriteLine($"\r\nHow many actors you would like to Co-Star? (No less than 2, no more than {ActorObjList.Count})", ProfileManager.InfoColor);
                 readQuantity = Console.ReadKey().KeyChar.ToString();
             }
 
@@ -109,7 +110,7 @@ namespace QARobot
 
                 while (!IsStringIntRange(actorIndex, 0, ActorObjList.Count - 1))
                 {
-                    Console.WriteLine($"\r\nPlease enter index of actor #{i + 1}: ");
+                    Console.WriteLine($"\r\nPlease enter index of actor #{i + 1}: ", ProfileManager.InfoColor);
                     actorIndex = Console.ReadLine();
                 }
 

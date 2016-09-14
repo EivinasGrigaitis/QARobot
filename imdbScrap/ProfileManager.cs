@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Drawing;
 using OpenQA.Selenium.Firefox;
+using Console = Colorful.Console;
 
 namespace QARobot
 {
     class ProfileManager
     {
+        public static readonly Color InfoColor = Color.NavajoWhite;
+        public static readonly Color ErrorColor = Color.IndianRed;
+        public static readonly Color SuccessColor = Color.LimeGreen;
+        public static readonly Color ResultColor = Color.CadetBlue;
+
         public static string ChromeOnLinuxProfile =
             "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.11 (KHTML, like Gecko) Ubuntu/11.10 Chromium/17.0.963.65 Chrome/17.0.963.65 Safari/535.11";
 
@@ -44,7 +51,7 @@ namespace QARobot
                               2) Internet explorer on iOS;
                               3) Safari on Mac;
                               4) User default;
-                              5) No profile;");
+                              5) No profile;", InfoColor);
 
             var input = Console.ReadKey().KeyChar.ToString();
             int selectionKey;
@@ -56,32 +63,32 @@ namespace QARobot
                 switch (selectionKey)
                 {
                     case 1:
-                        Console.WriteLine("\r\nYou have selected Chrome on Linux profile.");
+                        Console.WriteLine("\r\nYou have selected Chrome on Linux profile.", InfoColor);
                         profile = ChangeProfileUserAgent(ChromeOnLinuxProfile);
                         done = true;
                         break;
                     case 2:
-                        Console.WriteLine("\r\nYou have selected Internet explorer on iOS profile.");
+                        Console.WriteLine("\r\nYou have selected Internet explorer on iOS profile.", InfoColor);
                         profile = ChangeProfileUserAgent(IeOniOsProfile);
                         done = true;
                         break;
                     case 3:
-                        Console.WriteLine("\r\nYou have selected Safari on Mac profile.");
+                        Console.WriteLine("\r\nYou have selected Safari on Mac profile.", InfoColor);
                         profile = ChangeProfileUserAgent(SafariOnMacProfile);
                         done = true;
                         break;
                     case 4:
-                        Console.WriteLine("\r\nYou have selected user default profile.");
+                        Console.WriteLine("\r\nYou have selected user default profile.", InfoColor);
                         profile = CookieProfiles(DefaultProfile);
                         done = true;
                         break;
                     case 5:
-                        Console.WriteLine("\r\nYou have selected selenium profile.");
+                        Console.WriteLine("\r\nYou have selected selenium profile.", InfoColor);
                         profile = CookieProfiles(EmptyProfile);
                         done = true;
                         break;
                     default:
-                        Console.WriteLine("\r\nIncorrect value. Please enter 1,2,3,4 or 5.");
+                        Console.WriteLine("\r\nIncorrect value. Please enter 1,2,3,4 or 5.", ErrorColor);
                         input = Console.ReadKey().KeyChar.ToString();
                         int.TryParse(input, out selectionKey);
                         break;

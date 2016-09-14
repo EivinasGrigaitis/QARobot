@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using Console = Colorful.Console;
 
 namespace QARobot
 {
@@ -21,15 +22,15 @@ namespace QARobot
             SqlQueries.ActorObjList = scraper.UniqueActors.ToList();
 
             Database.FillDatabaseInfo(scraper);
-            Console.WriteLine("Data transfer complete.");
-            Console.Write("\r\nActor with most films: ");
+            Console.WriteLine("Data transfer complete.", ProfileManager.SuccessColor);
+            Console.Write("\r\nActor with most films: ", ProfileManager.ResultColor);
             Database.GetActorWithMostFilms();
-            Console.Write("\r\nActor with biggest film rating: ");
+            Console.Write("\r\nActor with biggest film rating: ", ProfileManager.ResultColor);
             Database.GetFilmWithBiggestRating();
 
             if (SqlQueries.ActorObjList.Count > 1)
             {
-                Console.WriteLine($"\r\nThe {SqlQueries.ActorObjList.Count} actors Co-Star in all these films:");
+                Console.WriteLine($"\r\nThe {SqlQueries.ActorObjList.Count} actors Co-Star in all these films:", ProfileManager.ResultColor);
                 Database.ActorsAndMovies(SqlQueries.UniversalString());
 
                 if (SqlQueries.ActorObjList.Count > 2)
@@ -49,7 +50,7 @@ namespace QARobot
             var readQuantity = "";
             while (!SqlQueries.IsStringIntRange(readQuantity, 1, 10))
             {
-                Console.WriteLine("\r\nHow many actors would you like to scrape? (Up to 10)");
+                Console.WriteLine("\r\nHow many actors would you like to scrape? (Up to 10)", ProfileManager.InfoColor);
                 readQuantity = Console.ReadLine();
             }
             var quantity = int.Parse(readQuantity);
@@ -59,7 +60,7 @@ namespace QARobot
             var i = 0;
             while (i < quantity)
             {
-                Console.WriteLine($"\r\nPlease enter name of actor #{i + 1}: ");
+                Console.WriteLine($"\r\nPlease enter name of actor #{i + 1}: ", ProfileManager.InfoColor);
                 var actorName = Console.ReadLine();
                 try
                 {
@@ -69,7 +70,7 @@ namespace QARobot
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine($"Sorry, couldn't find `{actorName}`. Please try again.");
+                    Console.WriteLine($"Sorry, couldn't find `{actorName}`. Please try again.", ProfileManager.ErrorColor);
                 }
             }
             return actorDict;
@@ -100,7 +101,7 @@ namespace QARobot
                         bool confirmedChoice = false;
                         while (!confirmedChoice)
                         {
-                            Console.Write($"\r\nDid you mean: {currentName} ({currentContext})? y/n: ");
+                            Console.Write($"\r\nDid you mean: {currentName} ({currentContext})? y/n: ", ProfileManager.InfoColor);
                             var input = Console.ReadLine();
                             if (input.ToLower() == "y")
                             {
@@ -117,7 +118,7 @@ namespace QARobot
             }
             catch (Exception )
             {
-                Console.WriteLine($"\r\nSorry, couldn't find {actor} on IMDB... Try another one!");
+                Console.WriteLine($"\r\nSorry, couldn't find {actor} on IMDB... Try another one!", ProfileManager.ErrorColor);
             }
 
             throw new Exception("Actor not found.");
