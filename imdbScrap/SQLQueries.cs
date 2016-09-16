@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using Console = Colorful.Console;
 using System.Text;
 
@@ -86,7 +87,6 @@ namespace QARobot
 
         public static string CoStarMethod()
         {
-            //Bug: fix selecting same actors
             Console.WriteLine("\r\nChoose Co-star actors :", ProfileManager.ResultColor);
             for (var i = 0; i < ActorObjList.Count; i++)
             {
@@ -94,7 +94,7 @@ namespace QARobot
             }
 
             string readQuantity = "";
-            var chosenActors = new List<Actor>();
+            var chosenActors = new HashSet<Actor>();
             int quantity;
             while (!IsStringIntRange(readQuantity, 2, ActorObjList.Count))
             {
@@ -104,19 +104,20 @@ namespace QARobot
 
             int.TryParse(readQuantity, out quantity);
 
-            for (var i = 0; i < quantity; i++)
+            while (chosenActors.Count < quantity)
             {
                 var actorIndex = "";
 
                 while (!IsStringIntRange(actorIndex, 0, ActorObjList.Count - 1))
                 {
-                    Console.WriteLine($"\r\nPlease enter index of actor #{i + 1}: ", ProfileManager.InfoColor);
+                    Console.WriteLine($"\r\nPlease enter index of actor #{chosenActors.Count + 1}: ", ProfileManager.InfoColor);
                     actorIndex = Console.ReadLine();
                 }
 
                 chosenActors.Add(ActorObjList[int.Parse(actorIndex)]);
             }
-            return UniversalString(chosenActors);
+            Console.WriteLine("\r\nYour chosen actors co-starred in all these films:", ProfileManager.InfoColor);
+            return UniversalString(chosenActors.ToList());
         }
 
         /// <summary>
