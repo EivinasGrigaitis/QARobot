@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using OpenQA.Selenium;
@@ -29,7 +30,15 @@ namespace QARobot
 
         public ActorScraper(FirefoxProfile profile)
         {
-            _driver = new FirefoxDriver(profile);
+            try
+            {
+                _driver = new FirefoxDriver(profile);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Sorry, couldn't access default Firefox profile. Using Selenium profile (empty) instead.", ProfileManager.ErrorColor);
+                _driver = new FirefoxDriver();
+            }
 
             _driver.Manage().Window.Maximize();
             _decimalFormat.NumberDecimalSeparator = ".";

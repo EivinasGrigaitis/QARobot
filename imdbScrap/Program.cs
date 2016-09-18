@@ -40,7 +40,9 @@ namespace QARobot
             }
 
             Database.CloseConnections();
-            Console.ReadLine();
+
+            Console.WriteLine("\r\nPress any key to exit...", ProfileManager.InfoColor);
+            Console.ReadKey();
         }
 
 
